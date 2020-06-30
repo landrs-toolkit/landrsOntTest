@@ -1,0 +1,82 @@
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sosa-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+landrs:sensorShape
+  a sh:NodeShape ;
+  sh:targetClass landrs:Sensor ;
+# mandatory properties
+# Restriction for sosa:Sensor (https://www.w3.org/TR/vocab-ssn/#SOSASensor)
+  sh:property [
+    sh:path sosa:observes ;
+    sh:NodeKind sh:IRI ;
+    sh:class sosa:ObservableProperty ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path sosa:isHostedBy ;
+    sh:NodeKind sh:IRI ;
+    sh:class sosa:System;
+    sh:minCount 1 ;
+  ];
+  sh:property [
+    sh:path ssn-system:hasOperatingRange  ;
+    sh:NodeKind sh:IRI ;
+    sh:class ssn-system:OperatingRange ;
+  ] ;
+# Properties from schema:Thing (https://schema.org/Thing)
+  sh:property [
+    sh:path schema:description ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );  
+  ] ;
+  sh:property [
+    sh:path schema:name ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );    
+  ] ;
+  sh:property [
+    sh:path schema:identifier ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype xsd:anyURI ; ] );
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+
+ssn-system:OperatingRangeShape
+  a sh:NodeShape ;
+  sh:targetClass ssn-system:OperatingRange ;
+# mandatory properties
+  sh:property [
+    sh:path ssn-system:inCondition  ;
+    sh:NodeKind sh:IRI ;
+    sh:class ssn-system:Condition ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path ssn-system:inCondition  ;
+    sh:NodeKind sh:IRI ;
+    sh:class schema:PropertyValue ;
+    sh:minCount 1 ;
+  ] ;  
+  sh:property [
+    sh:path rdfs:comment ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );  
+  ] .

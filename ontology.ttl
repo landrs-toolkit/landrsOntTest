@@ -1,0 +1,816 @@
+@prefix atm: <https://data.nasa.gov/ontologies/atmonto/ATM#> .
+@prefix aero: <https://semantics.aero/pages/swim-vocabulary#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cdt: <http://w3id.org/lindt/custom_datatypes#> .
+@prefix cor: <http://purl.org/ieee1872-owl/cora-bare#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dctype: <http://purl.org/dc/dcmitype/> .
+@prefix dbr:  <http://dbpedia.org/resource/> .
+@prefix eqp: <https://data.nasa.gov/ontologies/atmonto/equipment#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix opla: <http://ontologydesignpatterns.org/opla#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix pav:  <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix s3n: <http://w3id.org/s3n/> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sosa-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix tern-ssn: <https://w3id.org/tern/ontologies/ssn/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix vsso: <http://automotive.eurecom.fr/vsso#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix cpo: <http://daselab.org/ContextualizedWinstonPartWhole#> .
+@prefix po: <http://daselab.org/WinstonPartWhole#> .
+
+@prefix landrs: <http://schema.landrs.org/schema/> .
+
+foaf:Agent a owl:Class .
+foaf:name a owl:AnnotationProperty .
+voaf:Vocabulary a owl:Class .
+dcterms:title a owl:AnnotationProperty .
+dcterms:description a owl:AnnotationProperty .
+dcterms:rights a owl:AnnotationProperty .
+dcterms:license a owl:AnnotationProperty .
+dcterms:created a owl:AnnotationProperty .
+dcterms:creator a owl:AnnotationProperty .
+skos:definition a owl:AnnotationProperty .
+opla:isNativeTo a owl:AnnotationProperty .
+opla:reusesPatternAsTemplate a owl:AnnotationProperty .
+skos:example a owl:AnnotationProperty .
+skos:note a owl:AnnotationProperty .
+vann:preferredNamespacePrefix a owl:AnnotationProperty .
+vann:preferredNamespaceUri a owl:AnnotationProperty .
+schema:domainIncludes a owl:AnnotationProperty .
+schema:rangeIncludes a owl:AnnotationProperty .
+schema:version a owl:AnnotationProperty .
+
+
+# URI for the fully dereferencable ontology
+<http://schema.landrs.org/rdf> a owl:Ontology , voaf:Vocabulary, prov:Entity, dcat:Dataset ;
+  dcterms:title "Landrs Schema"@en ;
+  dcterms:description "This ontology is developed as part of the Sloan Funded LANDRS project to advance UxV data interoperability"@en ;
+  dcterms:creator [ a foaf:Agent, prov:Agent ; foaf:name "LANDRS: Linked and Networked Drones"@en ] ;
+  dcterms:rights "Copyright 2020 University of Notre Dame." ;
+  dcterms:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+  dcterms:created "2020-02-01"^^xsd:date ;
+  vann:preferredNamespacePrefix "landrs" ;
+  vann:preferredNamespaceUri "http://schema.landrs.org/schema/" ;
+  owl:versionInfo "0.0.1" ;
+  schema:versionInfo "0.0.1" ;
+  opla:reusesPatternAsTemplate <https://raw.githubusercontent.com/cogan-shimizu-wsu/WinstonPartWhole/master/WinstonPartWhole.owl> ;
+  dcat:distribution [
+    dcat:accessURL <http://schema.landrs.org/rdf> ;
+    dcat:mediaType <https://www.iana.org/assignments/media-types/application/ld+json> ;
+    dcat:mediaType <https://www.iana.org/assignments/media-types/application/n-triples>
+  ] .
+
+#### Classes Derived from Schema.org
+landrs:Thing a rdfs:Class ;
+  rdfs:label "Thing"@en ;
+  rdfs:comment "The most generic type of item."@en ;
+  schema:sameAs schema:Thing ;
+  owl:equivalentClass schema:Thing ;
+  owl:equivalentClass owl:Thing ;
+  rdfs:isDefinedBy <http://schema.landrs.org/rdf> .
+
+landrs:Event a rdfs:Class ;
+    rdfs:label "Event"@en ;
+    rdfs:comment "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the offers property. Repeated events may be structured as separate Event objects."@en ;
+    rdfs:subClassOf landrs:Thing ;
+    owl:equivalentClass dctype:Event ;
+    owl:equivalentClass schema:Event .
+
+landrs:Intangible a rdfs:Class ;
+    rdfs:label "Intangible" ;
+    schema:sameAs schema:Intangible ;
+    owl:equivalentClass schema:Intangible ;
+    rdfs:comment "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc." ;
+    rdfs:subClassOf landrs:Thing .
+
+landrs:Sensor a rdfs:Class ;
+  rdfs:label "Sensor"@en ;
+  rdfs:comment "Device involved in a Procedure. Sensors can be hosted by Platforms. For example: Accelerometers, gyroscopes, barometers, magnetometers, and so forth are Sensors that are typically mounted on a modern smart phone (which acts as Platform)."@en ;
+  rdfs:subClassOf sosa:Sensor ;  
+  rdfs:subClassOf landrs:Product .
+
+landrs:Product a rdfs:Class ;
+  rdfs:label "Product"@en ;
+  dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+  rdfs:comment "Any offered product or service. For example: a pair of shoes; a concert ticket; the rental of a car; a haircut; or an episode of a TV show streamed online."@en ;
+  owl:equivalentClass schema:Product ;
+  schema:sameAs schema:Product ;
+  rdfs:subClassOf landrs:Thing .
+
+landrs:ProductModel a rdfs:Class ;
+  rdfs:label "ProductModel" ;
+  dcterms:alternative:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass> ;
+  rdfs:comment "A datasheet or vendor specification of a product (in the sense of a prototypical description)." ;
+  rdfs:subClassOf landrs:Product ;
+  schema:sameAs schema:ProductModel ;
+  owl:equivalentClass schema:ProductModel .
+
+landrs:Actuator a rdfs:Class ;
+  rdfs:label "Actuator"@en ;
+  rdfs:comment "A device that is used by, or implements, an (actuating) Procedure. Actuators change the state of the world."@en ;
+  rdfs:subClassOf sosa:Actuator ;  
+  rdfs:subClassOf landrs:Product .
+
+landrs:QuantitativeValue a rdfs:Class ;
+    rdfs:label "QuantitativeValue" ;
+    schema:sameAs schema:QuantitativeValue ;
+    owl:equivalentClass schema:QuantitativeValue ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass> ;
+    rdfs:comment "A point value or interval for product characteristics and other purposes." ;
+    rdfs:subClassOf landrs:StructuredValue .
+
+landrs:PropertyValue a rdfs:Class ;
+    rdfs:label "PropertyValue" ;
+    owl:equivalentClass schema:PropertyValue ;
+    schema:sameAs schema:PropertyValue ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass> ;
+    rdfs:comment """A property-value pair, e.g. representing a feature of a product or place. Use the 'name' property for the name of the property. If there is an additional human-readable version of the value, put that into the 'description' property.<br/><br/>
+Always use specific schema.org properties when a) they exist and b) you can populate them. Using PropertyValue as a substitute will typically not trigger the same effect as using the original, specific property.""" ;
+    rdfs:subClassOf landrs:StructuredValue .
+
+landrs:StructuredValue a rdfs:Class ;
+    rdfs:label "StructuredValue" ;
+    schema:sameAs schema:StructuredValue ;
+    owl:equivalentClass schema:StructuredValue ;
+    rdfs:comment "Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing." ;
+    rdfs:subClassOf landrs:Intangible .
+
+
+landrs:Vehicle a rdfs:Class ;
+  rdfs:label "Vehicle"@en ;
+  rdfs:comment "A vehicle is a device that is designed or used to transport people or cargo over land, water, air, or through space."@en ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf td:Thing ;
+  schema:sameAs schema:Vehicle ;
+  owl:equivalentClass schema:Vehicle .
+
+# Classes added by VSSO Vehicle Sensors Ontology
+landrs:Branch a rdfs:Class, owl:Class;
+  schema:sameAs vsso:Branch ;
+  rdfs:label "Branch"@en;
+  rdfs:comment "Branch of the vehicle. Either a component (Body, Chassis...) or the complete vehicle"@en ;
+  rdfs:subClassOf landrs:Component .
+
+# General signal class.
+landrs:Signal a rdfs:Class, owl:Class ;
+  rdfs:label "Signal"@en ;
+  rdfs:comment "Signals protocol used by a vehicle such as Mavlink or VSS" ;
+  rdfs:subClassOf td:PropertyAffordance .
+
+landrs:SignalProtocol a rdfs:Class, owl:Class ;
+  rdfs:label "Signal Protocol"@en ;
+  rdfs:comment "Type of signal protocol used in the vehicls such as MAVLink or VSS" .
+
+
+landrs:ObservableSignal a rdfs:Class, owl:Class;
+  rdfs:subClassOf sosa:ObservableProperty;
+  schema:sameAs vsso:ObservableSignal ;
+  rdfs:label "Observable signal"@en;
+  rdfs:comment "All observable signals that can dynamically be updated by the vehicle"@en.
+
+landrs:ActuableSignal a rdfs:Class, owl:Class;
+  rdfs:subClassOf sosa:ActuableProperty;
+  schema:sameAs vsso:ObservableSignal ;
+  rdfs:subClassOf td:ActionAffordance ;
+  rdfs:label "Actuable signal"@en;
+  rdfs:comment "All actuable signals that can dynamically be updated by the vehicle"@en.
+
+
+### Classes derived from SWARMs
+landrs:AerialVehicle a rdfs:Class ;
+  rdfs:label "Aerial Vehicle"@en ;
+  rdfs:comment "A machine that is able to fly by gaining support from the air other than the reactions of the air against the earth’s surface" ;
+  rdfs:comment "Synonym with Aircraft" ;
+  rdfs:subClassOf landrs:Vehicle ;
+  rdfs:subClassOf wd:Q11436 ;
+  rdfs:subClassOf eqp:Aircraft .
+
+
+landrs:UnderwaterVehicle a rdfs:Class ;
+  rdfs:label "Underwater Vehicle"@en ;
+  rdfs:subClassOf landrs:Vehicle ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:SurfaceVehicle a rdfs:Class ;
+  rdfs:label "Surface Vehicle"@en ;
+  rdfs:subClassOf landrs:Vehicle ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:MotorizedVehicle a rdfs:Class ;
+  rdfs:label "Motorized Vehicle"@en ;
+  rdfs:subClassOf landrs:Vehicle ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:UnmotorizedVehicle a rdfs:Class ;
+  rdfs:label "Unmotorized Vehicle"@en ;
+  rdfs:subClassOf landrs:Vehicle ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:Robot a rdfs:Class ;
+  rdfs:label "Robot"@en;
+  rdfs:comment "Mechanical or virtual artificial agent carrying out physical activities"@en ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf wd:Q11012 ;
+  rdfs:subClassOf cor:Robot ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:AutonomousRobot a rdfs:Class ;
+  rdfs:label "Autonomous Robot"@en ;
+  rdfs:comment "An autonomous robot is a robot that performs behaviors or tasks with a high degree of autonomy (without external influence)."@en ;
+  rdfs:subClassOf landrs:Robot ;
+  rdfs:subClassOf wd:Q2916098 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:RemotelyPilotedRobot a rdfs:Class ;
+  rdfs:label "Remotely Piloted Robot"@en ;
+  rdfs:subClassOf landrs:Robot ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:AutomatedRobot a rdfs:Class ;
+  rdfs:label "Automated Robot"@en ;
+  rdfs:subClassOf landrs:Robot ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:RoboticVehicle a rdfs:Class ;
+  rdfs:label "Robotic Vehicle"@en;
+  rdfs:comment "Robotic vehicles are machines that move autonomously on the ground, in the air, undersea, or in space. Such vehicles are “unmanned,” in the sense that no humans are on board. In general, these vehicles move by themselves, under their own power, with sensors and computational resources onboard to guide their motion."@en ;
+  rdfs:subClassOf landrs:Vehicle ;
+  rdfs:subClassOf landrs:Robot ;
+  rdfs:subClassOf wd:Q4810574 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:UnderwaterRobot a rdfs:Class ;
+  rdfs:label "Underwater Robot"@en ;
+  rdfs:comment "Underwater Robots are vehicles that move autonomously underwater."@en ;
+  rdfs:subClassOf landrs:RoboticVehice ;
+  rdfs:subClassOf landrs:UnderwaterVehicle ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:SurfaceRobot a rdfs:Class ;
+  rdfs:label "Underwater Robot"@en ;
+  rdfs:comment "Surface Robots are vehicles that move autonomously on the water surface."@en ;
+  rdfs:subClassOf landrs:RoboticVehicle ;
+  rdfs:subClassOf landrs:SurfaceVehicle ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:AerialRobot a rdfs:Class ;
+  rdfs:label "Aerial Robot"@en ;
+  rdfs:comment "Aerial Robots are vehicles that move autonomously in the air."@en ;
+  rdfs:subClassOf landrs:RoboticVehice ;
+  rdfs:subClassOf landrs:AerialVehicle .
+
+
+
+landrs:AUV a rdfs:Class ;
+  rdfs:label "Autonomous Underwater Vehicle"@en ;
+  skos:altLabel "AUV"@en ;
+  rdfs:comment "An autonomous underwater vehicle (AUV) is a robot that travels underwater without requiring input from an operator."@en ;
+  rdfs:subClassOf landrs:UnderwaterRobot ;
+  rdfs:subClassOf landrs:AutonomousRobot ;
+  rdfs:subClassOf wd:Q257406 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:ROV a rdfs:Class ;
+  rdfs:label "Remotely Operated Underwater Vehicle"@en ;
+  skos:altLabel "ROV"@en ;
+  rdfs:subClassOf landrs:UnderwaterRobot ;
+  rdfs:subClassOf landrs:MotorizedVehicle ;
+  rdfs:subClassOf wd:Q618465 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+
+landrs:UnderwaterGlider a rdfs:Class ;
+  rdfs:label "Underwater Glider"@en ;
+  rdfs:comment "An underwater glider is a type of autonomous underwater vehicle (AUV) that employs variable-buoyancy propulsion instead of traditional propellers or thrusters. It employs variable buoyancy in a similar way to a profiling float, but unlike a float, which can only move up and down, an underwater glider is fitted with hydrofoils (underwater wings) that allow it to glide forward while descending through the water. At a certain depth, the glider switches to positive buoyancy to climb back up, and the cycle is then repeated."@en ;
+  rdfs:subClassOf landrs:AUV ;
+  rdfs:subClassOf landrs:UnmotorizedVehicle ;
+  rdfs:subClassOf wd:Q2634473 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:ASV a rdfs:Class ;
+  rdfs:label "Autonomous Surface Vehicle"@en ;
+  skos:altLabel "ASV";
+  rdfs:comment "Vehicle that operates on the surface of the water without a crew"@en ;
+  rdfs:subClassOf landrs:AutonomousRobot ;
+  rdfs:subClassOf landrs:SurfaceRobot ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+# This may be a problem since wikidata treats ASV and USV as equivalent
+landrs:USV a rdfs:Class ;
+  rdfs:label "Unmanned Surface Vehicle"@en ;
+  skos:altLabel "USV"@en ;
+  rdfs:comment "Vehicle that operates on the surface of the water without a crew"@en ;
+  rdfs:subClassOf landrs:SurfaceRobot ;
+  rdfs:subClassOf landrs:MotorizedVehicle ;
+  rdfs:subClassOf wd:Q4419860 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:Vessel a rdfs:Class ;
+  rdfs:label "Vessel"@en ;
+  rdfs:comment "Vehicle that is a watercraft, boat, or ship. Note: Wikidata definition of vessel includes spaceship this landrs:Vessel is a subClassOf wikidata vessel."@en ;
+  rdfs:subClassOf landrs:SurfaceVehicle ;
+  rdfs:subClassOf landrs:MotorizedVehicle ;
+  rdfs:subClassOf wd:Q16391167 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:Buoy a rdfs:Class ;
+  rdfs:label "Buoy"@en ;
+  rdfs:comment "A floating device that can be anchored (stationary) or allowed to drift with ocean currents."@en ;
+  rdfs:subClassOf landrs:UnmotorizedVehicle ;
+  rdfs:subClassOf wd:Q30026 ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+  ] .
+
+landrs:UxV a rdfs:Class ;
+  rdfs:label "Unmanned Vehicle"@en ;
+  rdfs:comment "An unmanned vehicle or uncrewed vehicle is a vehicle without a person on board. Uncrewed vehicles can either be remote controlled or remote guided vehicles, or they can be autonomous vehicles which are capable of sensing their environment and navigating on their own."@en ;
+  skos:prefLabel "Unmanned Vehicle"@en ;
+  skos:altLabel "UxV"@en ;
+  rdfs:subClassOf landrs:Vehicle ;
+  rdfs:subClassOf sosa:Platform ;
+  owl:equivalentClass wd:Q1527901 .
+
+
+landrs:UAV a rdfs:Class ;
+  rdfs:label "Unmanned Aerial Vehicle"@en ;
+  rdfs:comment "An aircraft without a human pilot on board and a type of unmanned vehicle. UAVs are a component of an unmanned aircraft system (UAS); which include a UAV, a ground-based controller, and a system of communications between the two. The flight of UAVs may operate with various degrees of autonomy: either under remote control by a human operator or autonomously by onboard computers." ;
+  skos:prefLabel "Unmanned Aerial Vehicle"@en ;
+  skos:altLable "UAV"@en ;
+  rdfs:subClassOf landrs:UxV ;
+  rdfs:subClassOf eqp:Aircraft ;
+  rdfs:subClassOf landrs:AerialRobot ;
+  rdfs:subClassOf landrs:MotorizedVehicle ;
+  rdfs:subClassOf <http://vocab.nerc.ac.uk/collection/L06/current/6D/> ;
+  rdfs:subClassOf <https://mmisw.org/ont/ioos/platform/unmanned_aerial_vehicle> ;
+  rdfs:subClassOf wd:Q484000 ;
+  rdfs:subClassOf dbr:Unmanned_aerial_vehicle ;
+  landrs:component landrs:UAS .
+
+landrs:UAS a rdfs:Class ;
+  rdfs:label "Unmanned Aircraft System"@en ;
+  rdfs:comment "An Unmanned Aerial Vehicle, ground-based controller and communication system."@en ;
+  skos:prefLabel "Unmanned Aircraft System"@en ;
+  skos:altLabel "UAS"@en ;
+  rdfs:subClassOf landrs:Product .
+
+landrs:GroundControlStation a rdfs:Class ;
+  rdfs:label "Ground Control Station"@en ;
+  rdfs:comment "A ground control station (GCS) is a land- or sea-based control center that provides the facilities for human control of Unmanned Aerial Vehicles (UAVs or drones)."@en ;
+  rdfs:equivalentClass wd:Q4118990 ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Ground_control_station> ;
+  landrs:component landrs:UAS ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:UAS
+  ] .
+
+landrs:CommunicationSystem a rdfs:Class ;
+  rdfs:label "Communication System"@en ;
+  rdfs:comment "Communication System, frequency and protocol by which a UxS communicates. For example Civilian UAV communications systems typically operate on frequencies of 2.4 GHz and 5.8 GHz. UAV communications systems work by using one frequency to control the aerial vehicle from the ground via a remote pilot while the other frequency is used to beam or relay First-Person View (FPV) video. By utilizing high-quality, reliable communications links, civilian UAVs are able to relay aerial visuals and data to those on the ground with ease, while still remaining in flight."@en ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf ssn:System ;
+  rdfs:subClassOf wd:Q31479975 ;
+  rdfs:subClassOf s3n:CommunicatingSystem ;
+  landrs:component landrs:UAS ;
+  landrs:isPartOf [
+    rdf:type landrs:Component, landrs:UAVComponent ;
+    landrs:hasWhole landrs:UAS
+  ] .
+
+landrs:Component a rdfs:Class ;
+  rdfs:label "Component"@en ;
+  rdfs:comment "Winston Part-Whole PO-Component-Type to enumerate composition of a UxV"@en ;
+  rdfs:subClassOf landrs:Product ;
+  owl:equivalentClass wd:Q811909 ;
+  owl:equivalentClass cpo:PO-Component-Type ;
+  opla:isNativeTo <https://raw.githubusercontent.com/cogan-shimizu-wsu/ContextualizedWinstonPartWhole/master/ContextualizedWinstonPartWhole.owl> .
+
+landrs:UAVComponent a rdfs:Class ;
+  rdfs:label "Unmanned Aircraft Component"@en;
+  rdfs:comment "Component of a Unmanned Aerial Vehicle"@en;
+  rdfs:subClassOf landrs:Component ;
+  rdfs:subClassOf wd:Q28816538 .
+
+
+landrs:Body a rdfs:Class, landrs:UAVComponent ;
+  rdfs:label "UxV Body"@en ;
+  rdfs:comment "Body of the UxV, for a UAV this would be an airframe"@en ;
+  rdfs:subClassOf landrs:Product ;
+  landrs:component landrs:UxV ;
+  landrs:isPartOf [
+    rdf:type landrs:Component, landrs:UAVComponent;
+    landrs:hasWhole landrs:UxV
+  ] .
+
+
+landrs:bodyType a rdf:Property ;
+    rdfs:label "bodyType"@en ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group> ;
+    schema:domainIncludes schema:Vehicle ;
+    schema:isPartOf <http://auto.schema.org> ;
+    schema:rangeIncludes schema:QualitativeValue,
+        schema:Text,
+        schema:URL ;
+    rdfs:comment "Indicates the design and body style of the vehicle (e.g. quadcopter, glider."@en .
+
+
+landrs:Airframe a rdfs:Class ;
+  rdfs:label "Airframe"@en ;
+  rdfs:comment "The mechanical structure of an aircraft is known as the airframe. This structure is typically considered to include the fuselage, undercarriage, empennage and wings, and exclude the propulsion system."@en ;
+  rdfs:subClassOf landrs:Body ;
+  owl:equivalentClass wd:Q222946 .
+
+
+landrs:Autopilot a rdfs:Class ;
+  rdfs:subClassOf aero:software-agent ;
+  rdfs:subClassOf  eqp:AircraftNavigationSystem ;
+  rdfs:subClassOf schema:SoftwareApplicaion ;
+  rdfs:subClassOf s3n:Algorithm ;
+  rdfs:label "Autopilot"@en ;
+  rdfs:comment "Software to control and navigate an aircraft"@en ;
+  skos:altLabel "Flight Controller"@en ;
+  skos:altLabel "Flight Controller Board"@en ;
+  landrs:component landrs:FlightControlSystem ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:FlightControlSystem
+  ] .
+
+
+landrs:Payload a rdfs:Class ;
+  rdfs:label "Payload"@en ;
+  rdfs:comment "Unmanned vehicle payload"@en ;
+  rdfs:subClassOf wd:Q319224 ;
+  landrs:component landrs:UAS ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:UAS
+  ] .
+
+landrs:SmartSensor a rdfs:Class, owl:Class ;
+  rdfs:label "Smart Sensor"@en;
+  rdfs:comment "Smart-Sensor - A SmartSensor is composed of one or more Sensors together with a MicroController that implements different Algorithms, and makes Algorithm Executions on the result of the Observations these Sensors make to output a resulting value for some Indicator. This value may then be communicated by some CommunicatingSystemCommunicatingSystem."@en;
+  schema:sameAs s3n:SmartSensor ;
+  rdfs:subClassOf ssn:System ;
+  rdfs:subClassOf sosa:Platform .
+
+landrs:SensorPayload a rdfs:Class ;
+  rdfs:label "Sensor Payload"@en ;
+  rdfs:comment "Payload that is a instrument platform such as cameras, atmospheric sensors, etc"@en ;
+  rdfs:subClassOf landrs:payload ;
+  rdfs:subClassOf sosa:System .
+
+landrs:CompanionComputer a rdfs:Class ;
+  rdfs:label "Companion Computer"@en ;
+  rdfs:comment "A companion computer is a device that travels on-board the vehicle and controls/communicates with the autopilot over a low-latency link. Apps running on a companion computer can perform computationally intensive or time-sensitive tasks, and add much greater intelligence than is provided by the autopilot alone." ;
+  rdfs:subClassOf landrs:payload ;
+  rdfs:subClassOf ssn:System ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf wd:Q944780 ;
+  rdfs:subClassOf s3n:MicroController ;
+  wdt:P279 wd:Q944780 .
+
+landrs:FlightControllerBoard a rdfs:Class ;
+  rdfs:label "Flight Controller Board"@en ;
+  rdfs:comment "A flight controller (FC) is a small circuit board of varying complexity. Its function is to direct the RPM of each motor in response to input. A command from the pilot for the multi-rotor to move forward is fed into the flight controller, which determines how to manipulate the motors accordingly."@en ;
+  rdfs:seeAlso <https://dronekit-python.readthedocs.io/en/latest/develop/companion-computers.html> ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf sosa:System ;
+  rdfs:subClassOf s3n:MicroController ;
+  landrs:component landrs:FlightControlSystem ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:FlightControlSystem
+  ] .
+
+landrs:FlightControlSystem a rdfs:Class ;
+  rdfs:label "Flight Control System"@en ;
+  rdfs:comment "Aircraft system utilized to control flight surfaces"@en ;
+  owl:equivalentClass wd:Q11481471 .
+
+landrs:Mission a rdfs:Class, landrs:Event, atm:Flight ;
+  rdfs:label "Mission"@en ;
+  rdfs:comment "Event associated with the deployment of a UxV"@en;
+  rdfs:subClassOf wd:Q13425175 .
+
+
+landrs:component a rdf:Property, owl:ObjectProperty ;
+  rdfs:label "Winston ODP Component p"@en ;
+  rdfs:comment "Winston Component part-of relation po-component"@en ;
+  owl:equivalentClass po:po-component ;
+  opla:isNativeTo <https://raw.githubusercontent.com/cogan-shimizu-wsu/WinstonPartWhole/master/WinstonPartWhole.owl> .
+
+
+landrs:isPartOf a rdf:Property, owl:ObjectProperty ;
+  rdfs:label "component"@en;
+  rdfs:comment "Winston ODP PartOf relation for component-integral object."@en ;
+  schema:domainIncludes owl:Thing ;
+  schema:rangeIncludes landrs:Component ;
+  owl:equivalentProperty cpo:isPartOf ;
+  schema:inverseOf landrs:hasWhole ;
+  owl:inverseOf landrs:hasWhole ;
+  opla:isNativeTo <https://raw.githubusercontent.com/cogan-shimizu-wsu/ContextualizedWinstonPartWhole/master/ContextualizedWinstonPartWhole.owl> .
+
+landrs:hasWhole a rdf:Property, owl:ObjectProperty ;
+  opla:isNativeTo <>;
+  rdfs:label "hasWhole"@en ;
+  rdfs:comment "Winston ODP Whole relation"@en ;
+  schema:domainIncludes landrs:Component ;
+  schema:rangeIncludes owl:Thing ;
+  owl:equivalentProperty cpo:hasWhole ;
+  schema:inverseOf landrs:isPartOf ;
+  owl:inverseOf landrs:isPartOf ;
+  opla:isNativeTo <https://raw.githubusercontent.com/cogan-shimizu-wsu/ContextualizedWinstonPartWhole/master/ContextualizedWinstonPartWhole.owl> .
+
+
+landrs:isVariantOf a rdf:Property ;
+    rdfs:label "isVariantOf" ;
+    rdfs:subPropertyOf schema:isVariantOf ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:ProductModel ;
+    schema:rangeIncludes landrs:ProductModel ;
+    rdfs:comment "A pointer to a base product from which this product is a variant. It is safe to infer that the variant inherits all product features from the base model, unless defined locally. This is not transitive." .
+
+landrs:predecessorOf a rdf:Property ;
+    rdfs:label "predecessorOf" ;
+    rdfs:subPropertyOf schema:predecessorOf ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:ProductModel ;
+    schema:rangeIncludes landrs:ProductModel ;
+    rdfs:comment "A pointer from a previous, often discontinued variant of the product to its newer variant." .
+
+schema:successorOf a rdf:Property ;
+    rdfs:label "successorOf" ;
+    owl:subPropertyOf schema:successorOf ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:ProductModel ;
+    schema:rangeIncludes landrs:ProductModel ;
+    rdfs:comment "A pointer from a newer variant of a product  to its previous, often discontinued predecessor." .
+
+landrs:additionalProperty a rdf:Property ;
+    rdfs:label "additionalProperty" ;
+    rdfs:subPropertyOf schema:additionalProperty ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes schema:PropertyValue ;
+    rdfs:comment """A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.<br/><br/> Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.""" .
+
+landrs:category a rdf:Property ;
+    rdfs:label "category" ;
+    rdfs:subPropertyOf schema:category;
+    dcterms:source <https://github.com/schemaorg/schemaorg/issues/1741>,
+        <https://github.com/schemaorg/schemaorg/issues/2490> ;
+    schema:category "issue-1741" ;
+    schema:domainIncludes landrs:Product ;
+
+    schema:rangeIncludes schema:Text,
+        schema:Thing ;
+    rdfs:comment "A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy." .
+
+landrs:isAccessoryOrSparePartFor a rdf:Property ;
+    rdfs:label "isAccessoryOrSparePartFor" ;
+    rdfs:subPropertyOf schema:isAccessoryOrSparePartFor ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes landrs:Product ;
+    rdfs:comment "A pointer to another product (or multiple products) for which this product is an accessory or spare part." .
+
+landrs:isConsumableFor a rdf:Property ;
+    rdfs:label "isConsumableFor" ;
+    rdfs:subPropertyOf schema:isConsumableFor ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes landrs:Product ;
+    rdfs:comment "A pointer to another product (or multiple products) for which this product is a consumable." .
+
+landrs:isRelatedTo a rdf:Property ;
+    rdfs:label "isRelatedTo" ;
+    rdfs:subPropertyOf schema:isRelatedTo ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes landrs:Product ;
+    rdfs:comment "A pointer to another, somehow related product (or multiple products)." .
+
+landrs:isSimilarTo a rdf:Property ;
+    rdfs:label "isSimilarTo" ;
+    rdfs:subPropertyOf schema:isSimilarTo ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes schema:Product;
+    schema:rangeIncludes schema:Product;
+    rdfs:comment "A pointer to another, functionally similar product (or multiple products)." .
+
+
+landrs:depth a rdf:Property ;
+    rdfs:label "depth" ;
+    rdfs:subClassOf schema:depth ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:Product;
+    schema:rangeIncludes schema:Distance,
+        schema:QuantitativeValue ;
+    rdfs:comment "The depth of the item." .
+
+landrs:height a rdf:Property ;
+    rdfs:label "height" ;
+    rdfs:subPropertyOf schema:height ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes schema:Distance,
+        schema:QuantitativeValue ;
+    rdfs:comment "The height of the item." .
+
+landrs:manufacturer a rdf:Property ;
+    rdfs:label "manufacturer" ;
+    rdfs:subPropertyOf schema:manufacturer ;
+    schema:domainIncludes schema:Product ;
+    schema:rangeIncludes schema:Organization ;
+    rdfs:comment "The manufacturer of the product." .
+
+landrs:material a rdf:Property ;
+    rdfs:label "material" ;
+    rdfs:subPropertyOf schema:material ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes landrs:Product,
+        schema:Text,
+        schema:URL ;
+    rdfs:comment "A material that something is made from, e.g. leather, wool, cotton, paper." .
+
+landrs:model a rdf:Property ;
+    rdfs:label "model" ;
+    rdfs:subClassOf schema:model ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes landrs:ProductModel,
+        schema:Text ;
+    rdfs:comment "The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties." .
+
+landrs:mpn a rdf:Property ;
+    rdfs:label "mpn" ;
+    rdfs:subPropertyOf schema:mpn ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes schema:Demand,
+        schema:Offer,
+        landrs:Product ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers." .
+
+landrs:weight a rdf:Property ;
+    rdfs:label "weight" ;
+    rdfs:subPropertyOf schema:weight ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> ;
+    schema:domainIncludes landrs:Product ;
+    schema:rangeIncludes schema:QuantitativeValue ;
+    rdfs:comment "The weight of the product or person." .
+
+landrs:width a rdf:Property ;
+    rdfs:label "width" ;
+    rdfs:subPropertyOf schema:width ;
+    schema:domainIncludes landrs:Product;
+    schema:rangeIncludes schema:Distance,
+        schema:QuantitativeValue ;
+    rdfs:comment "The width of the item." .
+
+
+## Properties from VSSO
+vsso:partOfBranch a owl:ObjectProperty, owl:TransitiveProperty, rdf:Property;
+  rdfs:label "part of"@en;
+  rdfs:comment "Relationship between 2 branches where one is a component of the second"@en;
+  rdfs:domain landrs:Branch;
+  rdfs:range landrs:Branch ;
+  schema:domainIncludes landrs:Branch ;
+  schema:rangeIncludes landrs:Branch ;
+  rdfs:subPropertyOf landrs:isPartOf .
+
+landrs:hasSignal a owl:ObjectProperty, rdf:Property;
+  rdfs:label "has signal"@en;
+  rdfs:comment "Property of having signals in a branch"@en;
+  rdfs:domain vsso:Branch;
+  rdfs:range [owl:unionOf vsso:ObservableSignal, vsso:ActuableSignal] ;
+  schema:domainIncludes landrs:Branch ;
+  schema:rangeIncludes landrs:ObservableSignal, landrs:ActuableSignal .
+
+landrs:attribute a owl:ObjectProperty, rdf:Property;
+  rdfs:label "Attribute"@en;
+  schema:sameAs vsso:attribute ;
+  rdfs:comment "Attribute signals that do not change during the power cycle of a vehicle."@en;
+  rdfs:domain landrs:Branch ;
+  schema:domainIncludes landrs:Branch .
+
+landrs:componentPosition a owl:ObjectProperty, rdf:Property;
+  rdfs:label "component position"@en;
+  rdfs:comment "Position of the branch within the vehicle"@en;
+  schema:sameAs vsso:position ;
+  rdfs:domain landrs:Branch ;
+  schema:domainIncludes landrs:Branch .
+
+landrs:hasProtocol a owl:ObjectProperty, rdf:Property ;
+  rdfs:label "hasProtocol"@en;
+  rdfs:comment "Type a protocol a signal uses" ;
+  schema:domainIncludes landrs:Signal ;
+  schema:rangeIncludes landrs:signalProtocol ;
+  rdfs:domain landrs:Signal ;
+  rdfs:range landrs:SignalProtocol .

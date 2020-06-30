@@ -1,0 +1,81 @@
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sosa-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+####
+# FlightControllerBoard
+####
+landrs:FlightControllerBoardShape
+a sh:NodeShape ;
+sh:targetClass landrs:FlightControllerBoard ;
+# mandatory properties
+sh:property [
+     sh:path landrs:isPartOf ;
+     sh:NodeKind sh:IRI ;
+     sh:class landrs:FlightControlSystem ; 
+     sh:minCount 1 ;
+] ;
+sh:property [
+     sh:path schema:description ;
+     sh:minCount 1 ;
+     sh:maxCount 1 ;
+     sh:or ( [ sh:datatype xsd:string ; ]
+          [ sh:datatype rdf:langString ; ] );  
+] ;
+sh:property [
+     sh:path schema:identifier ;
+     sh:or ( [ sh:datatype xsd:string ; ]
+          [ sh:datatype xsd:anyURI ; ] );
+     sh:minCount 1 ;
+     sh:maxCount 1 ;
+] ;
+sh:property [
+     sh:path schema:name ;
+     sh:minCount 1 ;
+     sh:maxCount 1 ;
+     sh:datatype xsd:string ;
+] ;
+# recommended properties
+sh:property [
+     sh:path schema:manufacturer ;
+     sh:class schema:Organization ;
+     sh:minCount 1;
+     sh:message "Manufacturer is recommended. Please fill in a value"@en ;
+     sh:severity sh:Warning ;
+] ;
+sh:property [
+     sh:path schema:serialNumber ;
+     sh:datatype xsd:string ;
+     sh:minCount 1 ;
+     sh:message "SerialNumber is recommended. Please fill in a value"@en ;
+     sh:severity sh:Warning ;
+] ;
+# It needs to be corrected...
+# The idea is that a FlightControllerBoard should hosts at least one Sensor AND at least onde Actuator 
+sh:property [
+	sh:path sosa:hosts ;
+	sh:minCount 2 ;
+] ;
+sh:property [
+	sh:path sosa:hosts ;
+	sh:qualifiedValueShape [ sh:class landrs:Sensor ] ;
+	sh:qualifiedValueShapesDisjoint true ;
+	sh:qualifiedMinCount 1 ;
+] ;
+sh:property [
+	sh:path sosa:hosts ;
+	sh:qualifiedValueShape [ sh:class landrs:Actuator ] ;
+	sh:qualifiedValueShapesDisjoint true ;
+	sh:qualifiedMinCount 1 ;
+] .
+

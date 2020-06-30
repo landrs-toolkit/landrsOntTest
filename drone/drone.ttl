@@ -1,0 +1,18 @@
+
+@base <http://ld.landrs.org/> .
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix eqp: <https://data.nasa.gov/ontologies/atmonto/equipment#> .
+@prefix schema: <http://schema.org/> .
+
+<id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a landrs:UAV ;
+td:title "My Drone Thing" ;
+schema:name "My Drone Thing" ;
+eqp:aircraftSerialNumber "XKFOENGENXWE"@en ;
+eqp:aircraftTypeDesignator "Drone"@en ;
+schema:Model "Mavic"@en;
+schema:Brand "DJI"@en ;
+landrs:component <id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> .
+
+# ToDo: Write a example of landrs:UAS.
+<id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> a landrs:UAS .

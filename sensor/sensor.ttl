@@ -1,0 +1,105 @@
+@base <https://ld.landrs.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sosa-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix qudt-1-1: <http://qudt.org/1.1/schema/qudt#> .
+@prefix qudt-unit-1-1: <http://qudt.org/1.1/vocab/unit#> .
+@prefix envo: <http://purl.obolibrary.org/obo/> .
+@prefix ir: <http://www.ontologydesignpatterns.org/cp/owl/informationrealization.owl#> .
+@prefix st: <http://www.opengis.net/spec/iot_sensing/1.0/req/> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix geoschemas: <http://geoschemas.org/> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix eqp: <https://data.nasa.gov/ontologies/atmonto/equipment#> .
+@prefix atm: <https://data.nasa.gov/ontologies/atmonto/ATM#> .
+@prefix aero: <semantics.aero/pages/swim-vocabulary#> .
+@prefix traj: <http://w3id.org/daselab/onto/trajectory#> .
+@prefix step: <http://www.purl.org/net/step#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> a landrs:Sensor ;
+rdfs:label "Bosh Sensortec 6-axis inertial measurement unit"@en ;
+rdfs:comment "THe BMI055 is an ultra-small, 6-axis inertial sensor, consisting of: A digital, triaxial 12bit acceleration sensor and a digital, triaxial 16bit, ±2000°/s gyroscope" ;
+schema:name "Bosh Sensortec 6-axis inertial measurement unit"@en ;
+schema:description "THe BMI055 is an ultra-small, 6-axis inertial sensor, consisting of: A digital, triaxial 12bit acceleration sensor and a digital, triaxial 16bit, ±2000°/s gyroscope" ;
+schema:identifier "BMI055" ;
+schema:sameAs <https://www.bosch-sensortec.com/bst/products/all_products/bmi055> ;
+wdt:P31 wd:Q941680 ; # Wikidata instanceOf inertial measurement unit
+sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
+sosa:observes <http://sweetontology.net/propSpeed#Acceleration> .
+
+
+<id/MmUwNzU4ZDctOTcxZS00N2JhLWIwNGEtNWU4NzAyMzY1YWUwCg==> a landrs:Sensor ;
+rdfs:label "iSentek Three-axis Magnetometer"@en ;
+rdfs:comment "iSentek’s three-axis magnetometers use anisotropic magneto resistance (AMR)technology. They offer high spatial resolution, high precision and low power consumption performance. " ;
+schema:name "iSentek Three-axis Magnetometer"@en ;
+schema:description "iSentek’s three-axis magnetometers use anisotropic magneto resistance (AMR)technology. They offer high spatial resolution, high precision and low power consumption performance. " ;
+schema:identifier "XXXX" ;
+schema:sameAs <http://www.isentek.com/en/the_product.php?pid=4> ;
+wdt:P31 wd:Q333921; # Wikidata instanceOf magnetometer
+sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
+sosa:observes <http://sweetontology.net/propSpaceLocation#Position> .
+
+<id/OGIxYjVjOGEtOTgwZS00NDZhLTgzNTAtMzYyMzZlMzhjZDQ3Cg==> a landrs:Sensor ;
+rdfs:label "TDK ICM-20629 Accelerometer-Gyroscope"@en ;
+schema:name "TDK ICM-20629 Accelerometer-Gyroscope" ;
+rdfs:comment "ICM-20689 is a 6-axis MotionTracking device that combines a 3-axis gyroscope, 3-axis accelerometer" ;
+schema:description "ICM-20689 is a 6-axis MotionTracking device that combines a 3-axis gyroscope, 3-axis accelerometer" ;
+schema:identifier "ICM-20689" ;
+schema:sameAs <https://www.invensense.com/products/motion-tracking/6-axis/icm-20689/>;
+wdt:P31 wd:Q192940 ;
+wdt:P31 wd:Q483400 ;
+sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
+sosa:observes <http://sweetontology.net/propSpaceDirection#Orientation> ;
+sosa:observes <http://sweetontology.net/propSpeed#Acceleration> .
+
+<id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> a landrs:Sensor;
+rdfs:label "MS5611 Altimiter Pressure Sensor" ;
+schema:name "MS5611 Altimiter Pressure Sensor" ;
+rdfs:comment "Barometric pressure sensor optimized for altimeters and variometers with an altitude resolution of 10 cm" ;
+schema:description "Barometric pressure sensor optimized for altimeters and variometers with an altitude resolution of 10 cm" ;
+schema:identifier "MS5611" ;
+schema:sameAs <https://www.te.com/usa-en/product-CAT-BLPS0036.html> ;
+wdt:P31 wdt:Q216197 ;
+sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
+sosa:observes <http://sweetontology.net/propSpaceHeight#BarometricAltitude> ;
+ssn-system:hasOperatingRange <sensor/35-207306-844818-0/MS5611#AltimiterOperatingRange> .
+
+<sensor/35-207306-844818-0/MS5611#AltimiterOperatingRange> a ssn-system:OperatingRange ;
+rdfs:comment "The conditions in which the MS5611 Altimiter sensor is expected to operate."@en ;
+ssn-system:inCondition <NormalOperatingCondition> , <NormalPressureCondition> .
+
+<NormalOperatingCondition> a ssn-system:Condition , schema:PropertyValue ;
+  rdfs:comment "A temperature range of -40 to 85 Celsius."@en ;
+  schema:minValue -40.0 ;
+  schema:maxValue 85.0 ;
+  schema:unitCode qudt-unit-1-1:DegreeCelsius .
+
+<NormalPressureCondition> a ssn-system:Condition , schema:PropertyValue ;
+  rdfs:comment "A pressure range of 10 to 1200 mbar."@en ;
+  schema:minValue 10 ;
+  schema:maxValue 1200 ;
+  schema:unitCode qudt-unit-1-1:MilliBAR .
+
+<http://sweetontology.net/propSpaceHeight#BarometricAltitude> a sosa:ObservableProperty .
+
+<http://sweetontology.net/propSpaceDirection#Orientation> a sosa:ObservableProperty .
+
+<http://sweetontology.net/propSpeed#Acceleration> a sosa:ObservableProperty .
+
+<http://sweetontology.net/propSpaceLocation#Position> a sosa:ObservableProperty .
+
+<id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> a landrs:FlightControllerBoard .
