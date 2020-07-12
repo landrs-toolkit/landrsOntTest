@@ -20,9 +20,9 @@
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
-@prefix sosa-ext: <http://www.w3.org/ns/ssn/ext/> .
 @prefix ssn: <http://www.w3.org/ns/ssn/> .
 @prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix ssn-ext: <http://www.w3.org/ns/ssn/ext/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix tern-ssn: <https://w3id.org/tern/ontologies/ssn/> .
@@ -35,6 +35,8 @@
 
 @prefix cpo: <http://daselab.org/ContextualizedWinstonPartWhole#> .
 @prefix po: <http://daselab.org/WinstonPartWhole#> .
+
+
 
 @prefix landrs: <http://schema.landrs.org/schema/> .
 
@@ -86,13 +88,6 @@ landrs:Thing a rdfs:Class ;
   owl:equivalentClass schema:Thing ;
   owl:equivalentClass owl:Thing ;
   rdfs:isDefinedBy <http://schema.landrs.org/rdf> .
-
-landrs:Event a rdfs:Class ;
-    rdfs:label "Event"@en ;
-    rdfs:comment "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the offers property. Repeated events may be structured as separate Event objects."@en ;
-    rdfs:subClassOf landrs:Thing ;
-    owl:equivalentClass dctype:Event ;
-    owl:equivalentClass schema:Event .
 
 landrs:Intangible a rdfs:Class ;
     rdfs:label "Intangible" ;
@@ -193,26 +188,133 @@ landrs:ActuableSignal a rdfs:Class, owl:Class;
   rdfs:label "Actuable signal"@en;
   rdfs:comment "All actuable signals that can dynamically be updated by the vehicle"@en.
 
+### =============== Flight
+
+###  http://schema.landrs.org/schema/Flight
+landrs:Flight rdf:type  rdfs:Class, owl:Class ;
+              rdfs:subClassOf prov:Activity, 
+                              landrs:Event ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty landrs:providesParticipantRole ;
+                                owl:someValuesFrom landrs:UAV
+                              ],
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty landrs:qualifiedAssociation ;      
+                                owl:someValuesFrom landrs:FlightPlanAssociation ; # previously was landrs:FlightPlanExecution ; 
+                              ] ;                  
+              rdfs:label "Flight" .
+
+              ###  https://schema.landrs.org/schema/Event
+landrs:Event  rdf:type rdfs:Class, owl:Class ;
+              owl:equivalentClass dctype:Event ; ## don't know
+              rdfs:subClassOf schema:Event ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty landrs:providesParticipantRole ;
+                                owl:someValuesFrom landrs:ParticipantRole
+                              ] ;
+              rdfs:comment "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the offers property. Repeated events may be structured as separate Event objects."@en ;
+              rdfs:label "Event"@en .
+
+###  https://schema.landrs.org/schema/ParticipantRole
+landrs:ParticipantRole  rdf:type rdfs:Class, owl:Class ;
+                        rdfs:label "ParticipantRole" .
+
+###  http://schema.landrs.org/schema/providesParticipantRole
+landrs:providesParticipantRole  rdf:type owl:ObjectProperty ;
+                                rdfs:domains landrs:Event ;
+                                rdfs:range landrs:ParticipantRole ;
+                                rdfs:label "providesParticipantRole" .
+
+###  http://schema.landrs.org/schema/Place
+landrs:Place  rdf:type rdfs:Class, owl:Class ;
+              rdfs:subClassOf schema:Place ;
+              rdfs:label "Place"@en .
+
+###  https://schema.org/location
+schema:location rdf:type rdfs:Property, owl:ObjectProperty ;
+                rdfs:domain landrs:Event ;
+                rdfs:range landrs:Place ;
+                rdfs:label "location" .                  
+
+###  https://schema.landrs.org/schema/FlightPlanAssociation
+landrs:FlightPlanAssociation  rdf:type rdfs:Class, owl:Class ;
+                              rdfs:label "FlightPlanAssociation" .
+
+###  https://schema.landrs.org/schema/qualifiedAssociation
+landrs:qualifiedAssociation rdf:type rdf:Property, owl:ObjectProperty ;
+                            rdfs:domain landrs:Flight ;
+                            rdfs:range landrs:FlightplanAssociation ;
+                            rdfs:label "qualifiedAssociation" .  
+
+### =============== DataAquisition
+
+###  https://schema.landrs.org/schema/DataAquisition
+landrs:DataAquisition rdf:type rdfs:Class ;
+                      rdfs:subClassOf prov:Activity ; # not sure...
+                      rdfs:label "DataAquisition" .
+
+###  http://schema.landrs.org/schema/DataPlanAssociation
+landrs:DataPlanAssociation  rdf:type  owl:Class, rdfs:Class ;
+                            rdfs:subClassOf
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty landrs:hadPlan ;
+                                        owl:someValuesFrom landrs:DataCapturePlan
+                                      ] ;
+                            rdfs:label "DataPlanAssociation" .
+
+###  http://www.w3.org/ns/prov#wasGeneratedBy
+prov:wasGeneratedBy rdf:type owl:ObjectProperty ;
+                    rdfs:domain landrs:Observationcollection ;
+                    rdfs:range landrs:DataAquisition ;
+                    rdfs:label "wasGeneratedBy" .
+
+###  http://www.w3.org/ns/prov#wasInformedBy
+prov:wasInformedBy  rdf:type owl:ObjectProperty ;
+                    rdfs:domain landrs:DataAquisition ;
+                    rdfs:range landrs:Flight ;
+                    rdfs:label "wasInformedBy" .
+
+
+### =============== ObservationCollection
+
+###  https://schema.landrs.org/schema/ObservationCollection
+landrs:ObservationCollection  rdf:type owl:Class ;
+                              rdfs:subClassOf dcat:Dataset ,
+                                              prov:Entity ,
+                                              ssn-ext:ObservationCollection ;
+                              rdfs:label ":ObservationCollection" .
+
+###  http://www.w3.org/ns/dcat#distribution
+dcat:distribution rdf:type owl:ObjectProperty ;
+                  rdfs:domain landrs:Observationcollection ;
+                  rdfs:range landrs:DroneDataDistribution ;
+                  rdfs:label "distribution" .
+
+
+###  https://schema.landrs.org/schema/DroneDataDistribution
+landrs:DroneDataDistribution  rdf:type owl:Class ;
+                              rdfs:label "DroneDataDistribution" .
+
+### =============== 
 
 ### Classes derived from SWARMs
-landrs:AerialVehicle a rdfs:Class ;
-  rdfs:label "Aerial Vehicle"@en ;
-  rdfs:comment "A machine that is able to fly by gaining support from the air other than the reactions of the air against the earth’s surface" ;
-  rdfs:comment "Synonym with Aircraft" ;
-  rdfs:subClassOf landrs:Vehicle ;
-  rdfs:subClassOf wd:Q11436 ;
-  rdfs:subClassOf eqp:Aircraft .
+landrs:AerialVehicle  rdf:type  rdfs:Class ;
+                      rdfs:label "Aerial Vehicle"@en ;
+                      rdfs:comment "A machine that is able to fly by gaining support from the air other than the reactions of the air against the earth’s surface" ;
+                      rdfs:comment "Synonym with Aircraft" ;
+                      rdfs:subClassOf landrs:Vehicle ;
+                      rdfs:subClassOf wd:Q11436 ;
+                      rdfs:subClassOf eqp:Aircraft .
 
-
-landrs:UnderwaterVehicle a rdfs:Class ;
-  rdfs:label "Underwater Vehicle"@en ;
-  rdfs:subClassOf landrs:Vehicle ;
-  prov:wasDerivedFrom [
-    a prov:Entity ;
-    dcterms:source <https://www.mdpi.com/185614> ;
-    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
-    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
-  ] .
+landrs:UnderwaterVehicle  rdf:type rdfs:Class ;
+                          rdfs:label "Underwater Vehicle"@en ;
+                          rdfs:subClassOf landrs:Vehicle ;
+                          prov:wasDerivedFrom [
+                                                a prov:Entity ;
+                                                dcterms:source <https://www.mdpi.com/185614> ;
+                                                schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+                                                dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+                                              ] .
 
 landrs:SurfaceVehicle a rdfs:Class ;
   rdfs:label "Surface Vehicle"@en ;
