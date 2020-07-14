@@ -10,6 +10,7 @@
 @prefix ssn: <http://www.w3.org/ns/ssn/> .
 @prefix qudt-unit-2-1: <http://qudt.org/2.1/vocab/unit#> .
 @prefix qudt-2-1:<http://www.qudt.org/2.1/schema/qudt#> . 
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 # ******************* ObservationCollection 1 *******************
 <id/Mzg2ODAzQTctQ0VCNi00MkJGLUFDNjYtRkU4QTVBQThBMzZBCg==> a landrs:ObservationCollection;

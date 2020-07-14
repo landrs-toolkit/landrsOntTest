@@ -4,6 +4,7 @@
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix eqp: <https://data.nasa.gov/ontologies/atmonto/equipment#> .
 @prefix schema: <http://schema.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a landrs:UAV ;
 td:title "My Drone Thing" ;
