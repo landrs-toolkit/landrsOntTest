@@ -1,0 +1,50 @@
+
+@base <https://ld.landrs.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sosa-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix qudt-1-1: <http://qudt.org/1.1/schema/qudt#> .
+@prefix qudt-unit-1-1: <http://qudt.org/1.1/vocab/unit#> .
+@prefix envo: <http://purl.obolibrary.org/obo/> .
+@prefix ir: <http://www.ontologydesignpatterns.org/cp/owl/informationrealization.owl#> .
+@prefix st: <http://www.opengis.net/spec/iot_sensing/1.0/req/> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix geoschemas: <http://geoschemas.org/> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<id/MTRGQTVCMzktRjE1RS00MjI2LUIwMDQtRUQ0Q0REMzhDMDc3Cg==> a landrs:Flight ;
+    schema:identifier "A0001" ;
+    schema:name "A0001" ;
+    schema:description "Test Flight" ;
+    schema:location <id/RjNBN0NFRDgtMTkxNS00MjJELUEyRDQtRThCRjQ2OEM3QjdGCg==> ;
+    prov:startedAtTime "2020-08-15T13:00:00-04:00"^^xsd:dateTime;
+    prov:endedAtTime   "2020-08-15T14:30:00-04:00"^^xsd:dateTime;
+    prov:wasAssociatedWith  <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> , # UAV 
+                            <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> , # sensor 
+                            <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> ; # sensor 
+    landrs:providesAgentRole <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> . # sensor ( not sure )
+
+
+<id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a landrs:UAV .
+
+<id/RjNBN0NFRDgtMTkxNS00MjJELUEyRDQtRThCRjQ2OEM3QjdGCg==> a landrs:Place ;
+schema:address "7 S. Broadway Denver, CO 80209".
+
+<id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> a landrs:Sensor .
+
+<id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> a landrs:Sensor .  
+

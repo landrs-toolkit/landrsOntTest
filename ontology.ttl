@@ -99,7 +99,8 @@ landrs:Intangible a rdfs:Class ;
 landrs:Sensor a rdfs:Class ;
   rdfs:label "Sensor"@en ;
   rdfs:comment "Device involved in a Procedure. Sensors can be hosted by Platforms. For example: Accelerometers, gyroscopes, barometers, magnetometers, and so forth are Sensors that are typically mounted on a modern smart phone (which acts as Platform)."@en ;
-  rdfs:subClassOf sosa:Sensor ;  
+  rdfs:subClassOf sosa:Sensor ;
+  rdfs:subClassOf prov:Agent ;
   rdfs:subClassOf landrs:Product .
 
 landrs:Product a rdfs:Class ;
@@ -188,42 +189,59 @@ landrs:ActuableSignal a rdfs:Class, owl:Class;
   rdfs:label "Actuable signal"@en;
   rdfs:comment "All actuable signals that can dynamically be updated by the vehicle"@en.
 
-### =============== Flight
-
 ###  http://schema.landrs.org/schema/Flight
-landrs:Flight rdf:type  rdfs:Class, owl:Class ;
-              rdfs:subClassOf prov:Activity, 
-                              landrs:Event ,
+landrs:Flight rdf:type  rdfs:Class, owl:Class;
+              rdfs:subClassOf prov:Activity ,
+                              schema:Event ,
                               [ rdf:type owl:Restriction ;
-                                owl:onProperty landrs:providesParticipantRole ;
-                                owl:someValuesFrom landrs:UAV
-                              ],
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty landrs:qualifiedAssociation ;      
-                                owl:someValuesFrom landrs:FlightPlanAssociation ; # previously was landrs:FlightPlanExecution ; 
-                              ] ;                  
-              rdfs:label "Flight" .
+                                owl:onProperty landrs:providesAgentRole ;
+                                owl:someValuesFrom landrs:AgentRole
+                              ] ;                              
+              prov:wasAssociatedWith landrs:UAV, landrs:Sensor ;
+              rdfs:label "Flight" .          
 
-              ###  https://schema.landrs.org/schema/Event
-landrs:Event  rdf:type rdfs:Class, owl:Class ;
-              owl:equivalentClass dctype:Event ; ## don't know
-              rdfs:subClassOf schema:Event ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty landrs:providesParticipantRole ;
-                                owl:someValuesFrom landrs:ParticipantRole
-                              ] ;
+###  https://schema.landrs.org/schema/Event
+landrs:Event  rdf:type rdfs:Class, owl:Class;
+              owl:equivalentClass dctype:Event ; ## (not sure)
+              rdfs:subClassOf schema:Event ;
               rdfs:comment "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the offers property. Repeated events may be structured as separate Event objects."@en ;
               rdfs:label "Event"@en .
 
-###  https://schema.landrs.org/schema/ParticipantRole
-landrs:ParticipantRole  rdf:type rdfs:Class, owl:Class ;
-                        rdfs:label "ParticipantRole" .
+###  https://schema.landrs.org/schema/AgentRole
+landrs:AgentRole  rdf:type rdfs:Class, owl:Class;
+                  rdfs:subClassOf
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty landrs:isInformedBy ;
+                                    owl:someValuesFrom landrs:Agent
+                                  ] ;                        
+                  rdfs:label "AgentRole" .
 
-###  http://schema.landrs.org/schema/providesParticipantRole
-landrs:providesParticipantRole  rdf:type owl:ObjectProperty ;
-                                rdfs:domains landrs:Event ;
-                                rdfs:range landrs:ParticipantRole ;
-                                rdfs:label "providesParticipantRole" .
+###  https://schema.landrs.org/schema/Agent
+landrs:Agent  rdf:type owl:Class ;
+              rdfs:subClassOf prov:Agent ;
+              rdfs:label "Agent" .
+
+###  https://schema.landrs.org/schema/Researcher
+landrs:Researcher rdf:type owl:Class ;
+                  rdfs:subClassOf landrs:AgentRole ;
+                  rdfs:label "Researcher" .
+
+###  https://schema.landrs.org/schema/UxVOperator
+landrs:UxVOperator  rdf:type owl:Class, prov:SoftwareAgent ;
+                    rdfs:subClassOf landrs:Agentrole ;
+                    rdfs:label "UxVOperator" .
+
+###  https://schema.landrs.org/schema/isInformedBy
+landrs:isInformedBy rdf:type owl:ObjectProperty ;
+                    rdfs:domain landrs:AgentRole ;
+                    rdfs:range landrs:Agent ;
+                    rdfs:label "isInformedBy" .
+
+###  http://schema.landrs.org/schema/providesAgentRole
+landrs:providesAgentRole  rdf:type owl:ObjectProperty ;
+                                rdfs:domains landrs:Flight ;
+                                rdfs:range landrs:AgentRole ;
+                                rdfs:label "providesAgentRole" .
 
 ###  http://schema.landrs.org/schema/Place
 landrs:Place  rdf:type rdfs:Class, owl:Class ;
@@ -231,7 +249,7 @@ landrs:Place  rdf:type rdfs:Class, owl:Class ;
               rdfs:label "Place"@en .
 
 ###  https://schema.org/location
-schema:location rdf:type rdfs:Property, owl:ObjectProperty ;
+schema:location rdf:type owl:ObjectProperty ;
                 rdfs:domain landrs:Event ;
                 rdfs:range landrs:Place ;
                 rdfs:label "location" .                  
@@ -244,58 +262,53 @@ landrs:FlightPlanAssociation  rdf:type rdfs:Class, owl:Class ;
 landrs:qualifiedAssociation rdf:type rdf:Property, owl:ObjectProperty ;
                             rdfs:domain landrs:Flight ;
                             rdfs:range landrs:FlightplanAssociation ;
-                            rdfs:label "qualifiedAssociation" .  
-
-### =============== DataAquisition
+                            rdfs:label "qualifiedAssociation" . 
 
 ###  https://schema.landrs.org/schema/DataAquisition
-landrs:DataAquisition rdf:type rdfs:Class ;
-                      rdfs:subClassOf prov:Activity ; # not sure...
+landrs:DataAquisition rdf:type owl:Class, rdfs:Class ;
+                      rdfs:subClassOf prov:Activity ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty prov:qualifiedAssociation ;
+                                        owl:someValuesFrom landrs:DataPlanAssociation
+                                      ] ;                    
+                      prov:wasInformedBy landrs:Flight ;
+                      prov:used landrs:ObservationCollection ;
+                      # prov:wasAssociatedWith landrs:Sensor;
+                      # prov:wasAssociatedWith landrs:UAV;
                       rdfs:label "DataAquisition" .
 
 ###  http://schema.landrs.org/schema/DataPlanAssociation
 landrs:DataPlanAssociation  rdf:type  owl:Class, rdfs:Class ;
-                            rdfs:subClassOf
-                                      [ rdf:type owl:Restriction ;
-                                        owl:onProperty landrs:hadPlan ;
-                                        owl:someValuesFrom landrs:DataCapturePlan
-                                      ] ;
+                            rdfs:subClassOf prov:Association ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty landrs:hadPlan ;
+                                              owl:someValuesFrom landrs:DataCapturePlan
+                                            ] ;
                             rdfs:label "DataPlanAssociation" .
 
-###  http://www.w3.org/ns/prov#wasGeneratedBy
-prov:wasGeneratedBy rdf:type owl:ObjectProperty ;
-                    rdfs:domain landrs:Observationcollection ;
-                    rdfs:range landrs:DataAquisition ;
-                    rdfs:label "wasGeneratedBy" .
-
-###  http://www.w3.org/ns/prov#wasInformedBy
-prov:wasInformedBy  rdf:type owl:ObjectProperty ;
-                    rdfs:domain landrs:DataAquisition ;
-                    rdfs:range landrs:Flight ;
-                    rdfs:label "wasInformedBy" .
-
+###  https://schema.landrs.org/schema/DataCaptureplan
+landrs:DataCaptureplan  rdf:type owl:Class ;
+                        rdfs:subClassOf prov:Plan ;
+                        rdfs:label "DataCapturePlan" .
 
 ### =============== ObservationCollection
 
 ###  https://schema.landrs.org/schema/ObservationCollection
-landrs:ObservationCollection  rdf:type owl:Class ;
+landrs:ObservationCollection  rdf:type rdfs:Class, owl:Class;
                               rdfs:subClassOf dcat:Dataset ,
                                               prov:Entity ,
                                               ssn-ext:ObservationCollection ;
-                              rdfs:label ":ObservationCollection" .
-
-###  http://www.w3.org/ns/dcat#distribution
-dcat:distribution rdf:type owl:ObjectProperty ;
-                  rdfs:domain landrs:Observationcollection ;
-                  rdfs:range landrs:DroneDataDistribution ;
-                  rdfs:label "distribution" .
-
+                              dcat:distribution landrs:DroneDataDistribution ;
+                              prov:wasGeneratedBy landrs:DataAquisition ;    
+                              prov:wasUsedBy landrs:DataAquisition ;
+                              prov:wasAtributedTo landrs:Sensor ; 
+                              sosa:madeBySensor landrs:Sensor ;    
+                              rdfs:label "ObservationCollection" .
 
 ###  https://schema.landrs.org/schema/DroneDataDistribution
 landrs:DroneDataDistribution  rdf:type owl:Class ;
+                              rdfs:subClassOf dcat:Distribution ;
                               rdfs:label "DroneDataDistribution" .
-
-### =============== 
 
 ### Classes derived from SWARMs
 landrs:AerialVehicle  rdf:type  rdfs:Class ;
@@ -537,6 +550,7 @@ landrs:UxV a rdfs:Class ;
   skos:altLabel "UxV"@en ;
   rdfs:subClassOf landrs:Vehicle ;
   rdfs:subClassOf sosa:Platform ;
+  rdfs:subClassOf landrs:Agent ;
   owl:equivalentClass wd:Q1527901 .
 
 
