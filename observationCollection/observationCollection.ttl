@@ -1,3 +1,4 @@
+@base <http://ld.landrs.org/> .
 @prefix landrs: <http://schema.landrs.org/schema/> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
@@ -9,21 +10,21 @@
 @prefix ssn-ext: <http://www.w3.org/ns/ssn/ext/> .
 @prefix ssn: <http://www.w3.org/ns/ssn/> .
 @prefix qudt-unit-2-1: <http://qudt.org/2.1/vocab/unit#> .
-@prefix qudt-2-1:<http://www.qudt.org/2.1/schema/qudt#> . 
+@prefix qudt-2-1:<http://www.qudt.org/2.1/schema/qudt#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 # ******************* ObservationCollection 1 *******************
 <id/Mzg2ODAzQTctQ0VCNi00MkJGLUFDNjYtRkU4QTVBQThBMzZBCg==> a landrs:ObservationCollection;
     prov:wasGeneratedBy <id/MTRGQTVCMzktRjE1RS00MjI2LUIwMDQtRUQ0Q0REMzhDMDc3Cg==> ; # landrs:Flight
-    prov:wasAtributedTo <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> ; # landrs:Sensor 
+    prov:wasAtributedTo <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> ; # landrs:Sensor
     rdfs:label "Acceleration Observation Collection for Flight: 'A0001'" ;
     dct:identifier "53472" ;
     dcat:distribution <id/MkQ2MDlCMjAtMEE5MS00OUYzLUJCRjYtMUY5M0ExODAzREY1Cg==> ; # landrs:DroneDataDistribution
     prov:wasUsedBy <id/Njk2QzJDNEUtMERBRS00NkIzLThCNEUtMjk3N0JFQzdERDYxCg==> ; # landrs:DataAquisition ;
-    sosa:madeBySensor <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> ;  # landrs:Sensor 
-    ssn-ext:hasMember   <id/MjMxMjRFMzgtNkQzMi00MDM3LUEzM0YtMDY0Q0JGRDIyNUQ3Cg==> ,  # sosa:Observation  
-                        <id/OEM2MjQ4ODAtRDMxOC00RDYxLUIwQjQtMEM5MDVBNTBFMEE2Cg==> ,  # sosa:Observation 
-                        <id/M0JCNDZBQkUtNDhBQy00RjlDLUE5NkUtNDM1NUMwNTM1RUJCCg==> .  # sosa:Observation 
+    sosa:madeBySensor <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> ;  # landrs:Sensor
+    ssn-ext:hasMember   <id/MjMxMjRFMzgtNkQzMi00MDM3LUEzM0YtMDY0Q0JGRDIyNUQ3Cg==> ,  # sosa:Observation
+                        <id/OEM2MjQ4ODAtRDMxOC00RDYxLUIwQjQtMEM5MDVBNTBFMEE2Cg==> ,  # sosa:Observation
+                        <id/M0JCNDZBQkUtNDhBQy00RjlDLUE5NkUtNDM1NUMwNTM1RUJCCg==> .  # sosa:Observation
 
 <id/MjMxMjRFMzgtNkQzMi00MDM3LUEzM0YtMDY0Q0JGRDIyNUQ3Cg==> a sosa:Observation ;
     sosa:madeBySensor <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> ;
@@ -63,14 +64,14 @@
 
 <id/RjcxMkEzNzItRUJGRi00NzkzLTgzN0YtODVEMDk4RjdCMfjECg==> a landrs:ObservationCollection;
     prov:wasGeneratedBy <id/MTRGQTVCMzktRjE1RS00MjI2LUIwMDQtRUQ0Q0REMzhDMDc3Cg==> ; # landrs:Flight
-    prov:wasAtributedTo <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> ; # landrs:Sensor 
+    prov:wasAtributedTo <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> ; # landrs:Sensor
     rdfs:label "Altitude Pressure Observation Collection for Flight: 'A0001'" ;
     dct:identifier "53471" ;
     dcat:distribution <id/QUIyODM2QTMtNjU4Ny00NkVDLUEyNUQtOTY0QzE1MDEzQUMzCg==> ; # landrs:DroneDataDistribution
-    sosa:madeBySensor <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> ; # landrs:Sensor 
+    sosa:madeBySensor <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> ; # landrs:Sensor
     prov:wasUsedBy <id/Njk2QzJDNEUtMERBRS00NkIzLThCNEUtMjk3N0JFQzdERDYxCg==> ; # landrs:DataAquisition ;
-    ssn-ext:hasMember   <Observation/altitude> , # sosa:Observation 
-                        <Observation/pressure> . # sosa:Observation 
+    ssn-ext:hasMember   <Observation/altitude> , # sosa:Observation
+                        <Observation/pressure> . # sosa:Observation
 
 <Observation/altitude> a sosa:Observation ;
     rdfs:label "Flight: 'A0001' | Altitude Pressure Assessment | Observation 1 (ALTITUDE)" ;
@@ -89,6 +90,4 @@
     dcat:mediaType <https://www.iana.org/assignments/media-types/application/ld+json> ;
     dcat:mediaType <https://www.iana.org/assignments/media-types/application/n-triples> .
 
-<id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> a landrs:Sensor .    
-
-
+<id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> a landrs:Sensor .
