@@ -1,4 +1,3 @@
-@base <http://ld.landrs.org/> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix landrs: <http://schema.landrs.org/schema/> .
 @prefix wd: <http://www.wikidata.org/entity/> .

@@ -1,5 +1,3 @@
-
-@base <http://ld.landrs.org/> .
 @prefix landrs: <http://schema.landrs.org/schema/> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix eqp: <https://data.nasa.gov/ontologies/atmonto/equipment#> .
