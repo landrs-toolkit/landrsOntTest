@@ -228,7 +228,8 @@ landrs:Researcher rdf:type owl:Class ;
 
 ###  https://schema.landrs.org/schema/UxVOperator
 landrs:UxVOperator  rdf:type owl:Class, prov:SoftwareAgent ;
-                    rdfs:subClassOf landrs:Agentrole ;
+                    rdfs:subClassOf landrs:AgentRole ;
+                    landrs:isInformedBy landrs:UxV ;
                     rdfs:label "UxVOperator" .
 
 ###  https://schema.landrs.org/schema/isInformedBy

@@ -32,10 +32,8 @@
     prov:startedAtTime "2020-08-15T13:00:00-04:00"^^xsd:dateTime;
     prov:endedAtTime   "2020-08-15T14:30:00-04:00"^^xsd:dateTime;
     prov:wasAssociatedWith  <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> , # UAV
-                            <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> , # sensor
-                            <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> ; # sensor
-    landrs:providesAgentRole <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> . # sensor ( not sure )
-
+                            <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> , # Sensor
+                            <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> . # Sensor
 
 <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a landrs:UAV .
 

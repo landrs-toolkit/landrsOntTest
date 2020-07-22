@@ -1,0 +1,114 @@
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sosa-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+####
+# DataAquisitionShape
+####
+landrs:DataAquisitionShape
+  a sh:NodeShape ;
+  sh:targetClass landrs:DataAquisition;
+  # Mandatory properties 
+  sh:property [
+    sh:path prov:startedAtTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:dateTime;
+  ] ;
+  sh:property [
+    sh:path prov:endedAtTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:dateTime;
+  ] ;
+  sh:property [
+    sh:path prov:qualifiedAssociation ;
+    sh:NodeKind sh:IRI ;
+    sh:class landrs:DataPlanAssociation ;
+    sh:minCount 1;
+  ] ;
+  sh:property [
+    sh:path prov:used ;
+    sh:NodeKind sh:IRI ;
+    sh:class landrs:ObservationCollection ;
+    sh:minCount 1;
+  ] ;
+  sh:property [
+    sh:path prov:wasInformedBy ;
+    sh:NodeKind sh:IRI ;
+    sh:class landrs:Flight ;
+    sh:minCount 1;
+  ] ;
+    sh:property [
+    sh:path rdfs:comment ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;    
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );
+  ] ;
+  .
+
+####
+# DataPlanAssociationShape
+####
+landrs:DataPlanAssociationShape
+  a sh:NodeShape ;
+  sh:targetClass landrs:DataPlanAssociation ;
+  # Mandatory properties
+  sh:property [
+    sh:path landrs:agent ;
+    sh:NodeKind sh:IRI ;
+    sh:class landrs:UAV ;
+    sh:minCount 1;
+  ] ;
+  sh:property [
+    sh:path prov:hadRole ;
+    sh:NodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;    
+    sh:class landrs:AgentRole ;
+  ] ;
+  sh:property [
+    sh:path prov:hadPlan ;
+    sh:NodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;    
+    sh:class landrs:DataCapturePlan ;
+  ] ;  
+    sh:property [
+    sh:path rdfs:comment ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );
+  ] ;
+  .
+
+
+####
+# DataCapturePlanShape
+####
+landrs:DataCapturePlanShape
+  a sh:NodeShape ;
+  sh:targetClass landrs:DataCapturePlan ;
+  # Mandatory properties 
+    sh:property [
+    sh:path rdfs:comment ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );
+  ] ;
+  .

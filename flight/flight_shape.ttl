@@ -1,4 +1,6 @@
 @prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,6 +12,62 @@
 @prefix ssn: <http://www.w3.org/ns/ssn/> .
 @prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 
+
+####
+# FlightShape
+####
+landrs:FlightShape
+    a sh:NodeShape ;
+    sh:targetClass landrs:Flight ;
+    # Mandatory properties 
+    sh:property [
+        sh:path prov:startedAtTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime;
+    ] ;
+    sh:property [
+        sh:path prov:endedAtTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime;
+    ] ;
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ; 
+    sh:property [
+        sh:path schema:description ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:or ( [ sh:datatype xsd:string ; ]
+            [ sh:datatype rdf:langString ; ] );
+    ] ;
+    sh:property [
+        sh:path schema:location ;
+        sh:NodeKind sh:IRI ;
+        sh:class landrs:Place ;
+        sh:minCount 1;
+    ] ;
+	sh:property [
+		sh:path prov:wasAssociatedWith ;
+		sh:qualifiedValueShape [ sh:class landrs:UAV ] ;
+		sh:qualifiedValueShapesDisjoint true ;
+		sh:qualifiedMinCount 1 ;
+		sh:qualifiedMaxCount 1 ;
+	] ;
+	sh:property [
+		sh:path prov:wasAssociatedWith ;
+		sh:qualifiedValueShape [ sh:class landrs:Sensor ] ;
+		sh:qualifiedValueShapesDisjoint true ;
+		sh:qualifiedMinCount 1 ;
+	] .

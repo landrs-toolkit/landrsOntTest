@@ -19,14 +19,15 @@
                 <id/RjcxMkEzNzItRUJGRi00NzkzLTgzN0YtODVEMDk4RjdCMfjECg==> ; # landrs:ObservationCollection;
     prov:qualifiedAssociation <id/RTgyOUY3MUEtMjU3MS00RDE2LUIyN0YtRkRGOUMzNjgxQTdDCg==> ; # landrs:DataPlanAssociation
     rdfs:comment "Data aquisition X" .
+    
 
 <id/RTgyOUY3MUEtMjU3MS00RDE2LUIyN0YtRkRGOUMzNjgxQTdDCg==> a landrs:DataPlanAssociation ;
-    landrs:agent   <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> ; # landrs:UAV ? (not sure)
+    landrs:agent <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> ; # landrs:UAV ? (not sure)
     prov:hadRole landrs:UxVOperator ;
     prov:hadPlan <id/Qzk1OTY4OTQtOEMwRi00OTg0LThENjItRjA5NTIyMUUzRjVECg==> ; # landrs:DataCapturePlan
     rdfs:comment "UxVOperator controled sensors (S1 and S2) and actuators (A1 and A2) to capture data conform with the Data capture plan XX."@en.
 
-<id/Qzk1OTY4OTQtOEMwRi00OTg0LThENjItRjA5NTIyMUUzRjVECg==> a landrs:DataCapturePlan, prov:Entity ;
+<id/Qzk1OTY4OTQtOEMwRi00OTg0LThENjItRjA5NTIyMUUzRjVECg==> a landrs:DataCapturePlan ;
     rdfs:comment "Capture features A and B"@en .
 
 <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a landrs:UAV .
@@ -36,5 +37,3 @@
 <id/Mzg2ODAzQTctQ0VCNi00MkJGLUFDNjYtRkU4QTVBQThBMzZBCg==> a landrs:ObservationCollection .
 
 <id/RjcxMkEzNzItRUJGRi00NzkzLTgzN0YtODVEMDk4RjdCMfjECg==> a landrs:ObservationCollection .
-
-landrs:UxVOperator a landrs:AgentRole .
