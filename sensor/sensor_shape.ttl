@@ -18,6 +18,9 @@ landrs:sensorShape
 # mandatory properties
 # Restriction for sosa:Sensor (https://www.w3.org/TR/vocab-ssn/#SOSASensor)
   sh:property [
+    sh:name "Property that we observe" ;
+    sh:order "0"^^xsd:decimal ;
+    sh:description "The abbreviation of the state or territory." ;
     sh:path sosa:observes ;
     sh:NodeKind sh:IRI ;
     sh:class sosa:ObservableProperty ;
@@ -26,7 +29,7 @@ landrs:sensorShape
   sh:property [
     sh:path sosa:isHostedBy ;
     sh:NodeKind sh:IRI ;
-    sh:class sosa:System;
+    sh:class landrs:FlightControllerBoard;
     sh:minCount 1 ;
   ];
   sh:property [
@@ -40,14 +43,14 @@ landrs:sensorShape
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:or ( [ sh:datatype xsd:string ; ]
-      [ sh:datatype rdf:langString ; ] );  
+      [ sh:datatype rdf:langString ; ] );
   ] ;
   sh:property [
     sh:path schema:name ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:or ( [ sh:datatype xsd:string ; ]
-      [ sh:datatype rdf:langString ; ] );    
+      [ sh:datatype rdf:langString ; ] );
   ] ;
   sh:property [
     sh:path schema:identifier ;
@@ -72,11 +75,11 @@ ssn-system:OperatingRangeShape
     sh:NodeKind sh:IRI ;
     sh:class schema:PropertyValue ;
     sh:minCount 1 ;
-  ] ;  
+  ] ;
   sh:property [
     sh:path rdfs:comment ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:or ( [ sh:datatype xsd:string ; ]
-      [ sh:datatype rdf:langString ; ] );  
+      [ sh:datatype rdf:langString ; ] );
   ] .

@@ -12,20 +12,20 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-landrs:FlightControlSystemShape 
+landrs:FlightControlSystemShape
     a sh:NodeShape ;
     sh:targetClass landrs:FlightControlSystem ;
 
     sh:property [
         sh:path sosa:isHostedBy ;
         sh:NodeKind sh:IRI ;
-        sh:class sosa:Platform ;
+        sh:class landrs:UAV ;
         sh:minCount 1;
     ] ;
     sh:property [
         sh:path landrs:isPartOf ;
         sh:NodeKind sh:IRI ;
-        sh:class sosa:Platform ;
+        sh:class landrs:UAV ;
         sh:minCount 1;
-    ] 
+    ]
 .
