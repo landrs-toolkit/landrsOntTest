@@ -1,0 +1,38 @@
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix qudt-1-1: <http://qudt.org/1.1/schema/qudt#> .
+@prefix qudt-unit-1-1: <http://qudt.org/1.1/vocab/unit#> .
+
+
+ssn-system:OperatingRangeShape
+  a sh:NodeShape ;
+  sh:targetClass ssn-system:OperatingRange ;
+# mandatory properties
+  sh:property [
+    sh:path rdfs:comment ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );    
+    sh:name "Comment" ;
+    sh:description "Example: Used for example to say that a Sensor has a particular accuracy in particular Conditions." ;        
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:order 0 ;
+  ] ;
+  sh:property [
+    sh:path ssn-system:inCondition ;
+    #sh:NodeKind sh:IRI ;
+    sh:and (  [ sh:class ssn-system:Condition ] 
+              [ sh:class schema:PropertyValue ] ) ;
+    sh:name "In Condition" ;
+    sh:description "Describes the prevailing environmental Conditions for the operating range." ;
+    sh:minCount 1 ;
+    sh:order 1 ;
+  ] .

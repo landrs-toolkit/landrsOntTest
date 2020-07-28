@@ -1,0 +1,29 @@
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix qudt-1-1: <http://qudt.org/1.1/schema/qudt#> .
+@prefix qudt-unit-1-1: <http://qudt.org/1.1/vocab/unit#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+
+
+<sensor/35-207306-844818-0/MS5611#AltimiterOperatingRange> a ssn-system:OperatingRange ;
+rdfs:comment "The conditions in which the MS5611 Altimiter sensor is expected to operate."@en ;
+ssn-system:inCondition <id/Q0UwMUZERDAtQUVBOS00NENBLUEzQkUtMjBFMUNGNzBCNjA2Cg==> , <id/NTMwMUMxOUYtNTRCOS00MjhELThBMzAtN0I1RTVGN0VBNDA5Cg==> .
+
+<id/Q0UwMUZERDAtQUVBOS00NENBLUEzQkUtMjBFMUNGNzBCNjA2Cg==> a ssn-system:Condition , schema:PropertyValue ;
+rdfs:comment "A temperature range of -40 to 85 Celsius."@en ;
+schema:minValue -40.0 ;
+schema:maxValue 85.0 ;
+schema:unitCode qudt-unit-1-1:DEG_C . # <http://qudt.org/1.1/vocab/unit#DEG_C>
+
+<id/NTMwMUMxOUYtNTRCOS00MjhELThBMzAtN0I1RTVGN0VBNDA5Cg==> a ssn-system:Condition , schema:PropertyValue ;
+rdfs:comment "A pressure range of 10 to 1200 mbar."@en ;
+schema:minValue 10 ;
+schema:maxValue 1200 ;
+schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#MilliBAR>

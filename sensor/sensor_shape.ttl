@@ -16,29 +16,21 @@ landrs:sensorShape
   a sh:NodeShape ;
   sh:targetClass landrs:Sensor ;
 # mandatory properties
-# Restriction for sosa:Sensor (https://www.w3.org/TR/vocab-ssn/#SOSASensor)
-  sh:property [
-    sh:name "Property that we observe" ;
-    sh:order "0"^^xsd:decimal ;
-    sh:description "The abbreviation of the state or territory." ;
-    sh:path sosa:observes ;
-    sh:NodeKind sh:IRI ;
-    sh:class sosa:ObservableProperty ;
-    sh:minCount 1 ;
-  ] ;
-  sh:property [
-    sh:path sosa:isHostedBy ;
-    sh:NodeKind sh:IRI ;
-    sh:class landrs:FlightControllerBoard;
-    sh:minCount 1 ;
-  ];
-  sh:property [
-    sh:path ssn-system:hasOperatingRange  ;
-    sh:NodeKind sh:IRI ;
-    sh:class ssn-system:OperatingRange ;
-  ] ;
 # Properties from schema:Thing (https://schema.org/Thing)
   sh:property [
+    sh:name "Name" ;
+    #sh:description "..." ;
+    sh:order "0"^^xsd:decimal ;    
+    sh:path schema:name ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+      [ sh:datatype rdf:langString ; ] );
+  ] ;
+    sh:property [
+    sh:name "Description" ;
+    #sh:description "..." ;
+    sh:order "1"^^xsd:decimal ;
     sh:path schema:description ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -46,40 +38,39 @@ landrs:sensorShape
       [ sh:datatype rdf:langString ; ] );
   ] ;
   sh:property [
-    sh:path schema:name ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:or ( [ sh:datatype xsd:string ; ]
-      [ sh:datatype rdf:langString ; ] );
-  ] ;
-  sh:property [
+    sh:name "Identifier" ;
+    #sh:description "..." ;
+    sh:order "2"^^xsd:decimal ;
     sh:path schema:identifier ;
     sh:or ( [ sh:datatype xsd:string ; ]
       [ sh:datatype xsd:anyURI ; ] );
     sh:minCount 1 ;
     sh:maxCount 1 ;
-  ] .
-
-ssn-system:OperatingRangeShape
-  a sh:NodeShape ;
-  sh:targetClass ssn-system:OperatingRange ;
-# mandatory properties
-  sh:property [
-    sh:path ssn-system:inCondition  ;
-    sh:NodeKind sh:IRI ;
-    sh:class ssn-system:Condition ;
-    sh:minCount 1 ;
   ] ;
+  # Restriction for sosa:Sensor (https://www.w3.org/TR/vocab-ssn/#SOSASensor)  
   sh:property [
-    sh:path ssn-system:inCondition  ;
+    sh:name "Flight Controller Board" ;
+    sh:description "Platform that the sensor is mounted on or hosted by." ;
+    sh:order "3"^^xsd:decimal ;    
+    sh:path sosa:isHostedBy ;
     sh:NodeKind sh:IRI ;
-    sh:class schema:PropertyValue ;
+    sh:class landrs:FlightControllerBoard;
     sh:minCount 1 ;
-  ] ;
+  ];
+sh:property [
+    sh:name "Property that we observe" ;
+    sh:description "The abbreviation of the state or territory." ;    
+    sh:order "4"^^xsd:decimal ;
+    sh:path sosa:observes ;
+    sh:NodeKind sh:IRI ;
+    sh:class sosa:ObservableProperty ;
+    sh:minCount 1 ;
+  ] ;  
   sh:property [
-    sh:path rdfs:comment ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:or ( [ sh:datatype xsd:string ; ]
-      [ sh:datatype rdf:langString ; ] );
+    sh:name "Sensor's operating range" ;
+    sh:description "Description for hasOperatingRange." ;    
+    sh:order "5"^^xsd:decimal ;
+    sh:path ssn-system:hasOperatingRange  ;
+    sh:NodeKind sh:IRI ;
+    sh:class ssn-system:OperatingRange ;
   ] .
