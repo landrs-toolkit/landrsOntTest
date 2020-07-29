@@ -19,7 +19,7 @@ ssn-system:OperatingRangeShape
   sh:property [
     sh:path rdfs:comment ;
     sh:or ( [ sh:datatype xsd:string ; ]
-      [ sh:datatype rdf:langString ; ] );    
+      [ sh:datatype rdf:langString ; ] );
     sh:name "Comment" ;
     sh:description "Example: Used for example to say that a Sensor has a particular accuracy in particular Conditions." ;        
     sh:minCount 1 ;
@@ -28,7 +28,7 @@ ssn-system:OperatingRangeShape
   ] ;
   sh:property [
     sh:path ssn-system:inCondition ;
-    #sh:NodeKind sh:IRI ;
+    sh:NodeKind sh:IRI ;
     sh:and (  [ sh:class ssn-system:Condition ] 
               [ sh:class schema:PropertyValue ] ) ;
     sh:name "In Condition" ;
