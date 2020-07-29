@@ -68,7 +68,7 @@ sh:property [
   ] ;  
   sh:property [
     sh:name "Sensor's operating range" ;
-    sh:description "Description for hasOperatingRange." ;    
+    sh:description "Describes normal operating properties of a system under some specific conditions." ;    
     sh:order "5"^^xsd:decimal ;
     sh:path ssn-system:hasOperatingRange  ;
     sh:NodeKind sh:IRI ;

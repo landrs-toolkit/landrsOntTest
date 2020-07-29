@@ -12,10 +12,6 @@
 @prefix schema: <http://schema.org/> .
 
 
-<sensor/35-207306-844818-0/MS5611#AltimiterOperatingRange> a ssn-system:OperatingRange ;
-rdfs:comment "The conditions in which the MS5611 Altimiter sensor is expected to operate."@en ;
-ssn-system:inCondition <NormalOperatingCondition> , <NormalPressureCondition> .
-
 <NormalOperatingCondition> a landrs:Condition ;
 rdfs:comment "A temperature range of -40 to 85 Celsius."@en ;
 schema:minValue "-40.0"^^xsd:decimal ;
@@ -27,3 +23,4 @@ rdfs:comment "A pressure range of 10 to 1200 mbar."@en ;
 schema:minValue "10"^^xsd:decimal ;
 schema:maxValue "1200"^^xsd:decimal ;
 schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#MilliBAR>
+

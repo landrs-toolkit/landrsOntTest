@@ -291,6 +291,12 @@ landrs:DataCaptureplan  rdf:type owl:Class ;
                         rdfs:subClassOf prov:Plan ;
                         rdfs:label "DataCapturePlan" .
 
+### =============== 
+landrs:Condition  rdf:type rdfs:Class, owl:Class ;
+                  rdfs:subClassOf ssn-system:Condition ,
+                                  schema:PropertyValue ;
+                  rdfs:label "Condition" .
+
 ### =============== ObservationCollection
 
 ###  https://schema.landrs.org/schema/ObservationCollection

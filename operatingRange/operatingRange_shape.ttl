@@ -21,18 +21,21 @@ ssn-system:OperatingRangeShape
     sh:or ( [ sh:datatype xsd:string ; ]
       [ sh:datatype rdf:langString ; ] );
     sh:name "Comment" ;
-    sh:description "Example: Used for example to say that a Sensor has a particular accuracy in particular Conditions." ;        
+    sh:description "Used for example to say that a Sensor has a particular accuracy in particular Conditions." ;        
     sh:minCount 1 ;
     sh:maxCount 1 ;
+    sh:resultSeverity sh:Violation ;
     sh:order 0 ;
   ] ;
   sh:property [
     sh:path ssn-system:inCondition ;
     sh:NodeKind sh:IRI ;
-    sh:and (  [ sh:class ssn-system:Condition ] 
-              [ sh:class schema:PropertyValue ] ) ;
+    sh:class landrs:Condition ;
+    #sh:and (  [ sh:class ssn-system:Condition ] 
+    #          [ sh:class schema:PropertyValue ] ) ;
     sh:name "In Condition" ;
     sh:description "Describes the prevailing environmental Conditions for the operating range." ;
     sh:minCount 1 ;
+    #sh:resultSeverity sh:Violation ;
     sh:order 1 ;
   ] .
