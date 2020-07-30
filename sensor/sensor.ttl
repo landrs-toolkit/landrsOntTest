@@ -101,20 +101,4 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
 
 <http://sweetontology.net/propSpaceLocation#Position> a sosa:ObservableProperty .
 
-<id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> a landrs:FlightControllerBoard ;
-  landrs:isPartOf <id/YWUyMWRjMzAtOTA3NC00ZTYwLWI5ZTUtNjFhZmU1OTAzMTIyCg==> ;
-  rdfs:label "CUAV 5+ Autopilot Board"@en ;
-  schema:name "CUAV V5" ;
-  rdfs:comment "V5+® is an advanced autopilot manufactured by CUAV®. It was designed by CUAV® in collaboration with the PX4 team."@en ;
-  schema:description "V5+® is an advanced autopilot manufactured by CUAV®. It was designed by CUAV® in collaboration with the PX4 team." ;
-  schema:identifier "CUAV5+" ;
-  schema:sameAs <http://docs.px4.io/master/en/flight_controller/cuav_v5_plus.html> ;
-  schema:Model "CUAV 5+"@en ;
-  wdt:P31 wd:Q220858 ;
-  schema:serialNumber "SerialNumber" ;
-  schema:manufacturer <id/CUAV> ;
-  sosa:hosts <id/OGIxYjVjOGEtOTgwZS00NDZhLTgzNTAtMzYyMzZlMzhjZDQ3Cg==> ;
-  sosa:hosts <id/ZmI3YzQ5NzMtMGFhMi00MTNhLWJjNzUtZjBmNmMxNTBkNjA3Cg==> ;
-  sosa:hosts <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> ;
-  sosa:hosts <id/MmUwNzU4ZDctOTcxZS00N2JhLWIwNGEtNWU4NzAyMzY1YWUwCg==> ;
-  sosa:hosts <id/OTNkMDI1YTctZGE4Ny00Y2IyLWI3MzgtMTU2YzVmMDU1MDI4Cg==> .
+<id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> a landrs:FlightControllerBoard .
