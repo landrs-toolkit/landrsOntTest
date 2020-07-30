@@ -20,62 +20,105 @@ a sh:NodeShape ;
 sh:targetClass landrs:FlightControllerBoard ;
 # mandatory properties
 sh:property [
-     sh:path landrs:isPartOf ;
-     sh:NodeKind sh:IRI ;
-     sh:class landrs:FlightControlSystem ; 
+     sh:path schema:name ;
+     sh:name "Name" ;
      sh:minCount 1 ;
+     sh:maxCount 1 ;
+     sh:datatype xsd:string ;
+     sh:severity sh:Violation ;
+     sh:order 0 ;
 ] ;
 sh:property [
      sh:path schema:description ;
+     sh:name "Description" ;     
      sh:minCount 1 ;
      sh:maxCount 1 ;
      sh:or ( [ sh:datatype xsd:string ; ]
-          [ sh:datatype rdf:langString ; ] );  
+          [ sh:datatype rdf:langString ; ] );
+     sh:severity sh:Violation ;
+     sh:order 1 ;
 ] ;
 sh:property [
      sh:path schema:identifier ;
      sh:or ( [ sh:datatype xsd:string ; ]
           [ sh:datatype xsd:anyURI ; ] );
+     sh:name "Identifier" ;
+     sh:description "The identifier property represents any kind of identifier for any kind of schema:Thing, such as ISBNs, GTIN codes, UUIDs etc.." ;
      sh:minCount 1 ;
      sh:maxCount 1 ;
-] ;
-sh:property [
-     sh:path schema:name ;
-     sh:minCount 1 ;
-     sh:maxCount 1 ;
-     sh:datatype xsd:string ;
+     sh:severity sh:Violation ;
+     sh:order 2 ;
 ] ;
 # recommended properties
 sh:property [
+     sh:path landrs:isPartOf ;
+     sh:NodeKind sh:IRI ;
+     sh:class landrs:FlightControlSystem ;
+     sh:name "FlightControlSystem" ;
+     sh:description "Flight control system which the flight controller board is part of." ;
+     sh:minCount 1 ;
+     sh:maxCount 1 ;
+     sh:severity sh:Warning ;
+     sh:message "Flight control system is recommended. Please fill in a value"@en ;
+     sh:order 3 ;
+] ;
+sh:property [
+	sh:path sosa:hosts ;
+     sh:NodeKind sh:IRI ;
+     sh:class landrs:Sensor ;
+     sh:name "Sensor" ;
+     sh:description "Sensor hosted on the flight controller board." ;
+     sh:minCount 1 ;
+     sh:severity sh:Warning ;
+     sh:message "Sensor is recommended. Please fill in a value"@en ;
+     sh:order 4 ;
+] ;
+sh:property [
      sh:path schema:manufacturer ;
      sh:class schema:Organization ;
-     sh:minCount 1;
-     sh:message "Manufacturer is recommended. Please fill in a value"@en ;
+     sh:name "Manufacturer" ;
+     sh:description "The manufacturer of the product." ;
+     sh:minCount 1 ;
+     sh:maxCount 1 ;
      sh:severity sh:Warning ;
+     sh:message "Manufacturer is recommended. Please fill in a value"@en ;
+     sh:order 5 ;
 ] ;
 sh:property [
      sh:path schema:serialNumber ;
      sh:datatype xsd:string ;
+     sh:name "Serial Number" ;
+     sh:description "The serial number or any alphanumeric identifier of the particular product." ;
+     sh:maxCount 1 ;
      sh:minCount 1 ;
-     sh:message "SerialNumber is recommended. Please fill in a value"@en ;
      sh:severity sh:Warning ;
-] ;
-# It needs to be corrected...
-# The idea is that a FlightControllerBoard should hosts at least one Sensor AND at least onde Actuator 
-sh:property [
-	sh:path sosa:hosts ;
-	sh:minCount 2 ;
-] ;
-sh:property [
-	sh:path sosa:hosts ;
-	sh:qualifiedValueShape [ sh:class landrs:Sensor ] ;
-	sh:qualifiedValueShapesDisjoint true ;
-	sh:qualifiedMinCount 1 ;
-] ;
-sh:property [
-	sh:path sosa:hosts ;
-	sh:qualifiedValueShape [ sh:class landrs:Actuator ] ;
-	sh:qualifiedValueShapesDisjoint true ;
-	sh:qualifiedMinCount 1 ;
+     sh:message "SerialNumber is recommended. Please fill in a value"@en ;
+     sh:order 6 ;
 ] .
 
+# sh:property [
+#	sh:path sosa:hosts ;
+#	sh:minCount 2 ;
+#     sh:name "Sensor, Actuator or Platform" ;
+#     sh:description "Sensor, Actuator or Platform, hosted or mounted on the flight controller board." ;
+#] ;
+#sh:property [
+#	sh:path sosa:hosts ;
+#	sh:qualifiedValueShape [ sh:class landrs:Sensor ] ;
+#	sh:qualifiedValueShapesDisjoint true ;
+#	sh:qualifiedMinCount 1 ;
+#     sh:name "Sensor" ;
+#     sh:description "." ;     
+#     sh:resultSeverity sh:Violation ;
+#     sh:order 0 ;
+#] ;
+#sh:property [
+#	sh:path sosa:hosts ;
+#	sh:qualifiedValueShape [ sh:class landrs:Actuator ] ;
+#	sh:qualifiedValueShapesDisjoint true ;
+#	sh:qualifiedMinCount 1 ;
+#     sh:name "Actuator" ;
+#     sh:description "." ;
+#     sh:resultSeverity sh:Violation ;
+#     sh:order 0 ;
+#] .

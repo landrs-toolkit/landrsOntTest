@@ -15,17 +15,36 @@
 landrs:FlightControlSystemShape
     a sh:NodeShape ;
     sh:targetClass landrs:FlightControlSystem ;
-
     sh:property [
-        sh:path sosa:isHostedBy ;
-        sh:NodeKind sh:IRI ;
-        sh:class landrs:UAV ;
-        sh:minCount 1;
+        sh:path rdfs:label ;
+        sh:or ( [ sh:datatype xsd:string ; ]
+                [ sh:datatype rdf:langString ; ] );
+        sh:name "Label" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:resultSeverity sh:Violation ;
+        sh:order 0 ;
     ] ;
     sh:property [
         sh:path landrs:isPartOf ;
         sh:NodeKind sh:IRI ;
         sh:class landrs:UAV ;
+        sh:name "UAV" ;
+        sh:description "Platform on which this flight control system is part." ;
         sh:minCount 1;
-    ]
-.
+        sh:resultSeverity sh:Violation ;
+        sh:order 2 ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:or ( [ sh:datatype xsd:string ; ]
+                [ sh:datatype rdf:langString ; ] );
+        sh:name "Comment" ;
+        sh:order 1 ;
+    ] .    
+#    sh:property [
+#        sh:path sosa:isHostedBy ;
+#        sh:NodeKind sh:IRI ;
+#        sh:class landrs:UAV ;
+#        sh:minCount 1;
+#    ] ;

@@ -9,9 +9,9 @@ td:title "My Drone Thing" ;
 schema:name "My Drone Thing" ;
 eqp:aircraftSerialNumber "XKFOENGENXWE"@en ;
 eqp:aircraftTypeDesignator "Drone"@en ;
-schema:Model "Mavic"@en;
-schema:Brand "DJI"@en ;
-landrs:component <id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> .
+schema:model "Mavic"@en;
+schema:Brand "DJI"@en .
+#landrs:component <id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> .
 
 # ToDo: Write a example of landrs:UAS.
-<id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> a landrs:UAS .
+#<id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> a landrs:UAS .

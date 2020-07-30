@@ -20,7 +20,7 @@ landrs:sensorShape
   sh:property [
     sh:name "Name" ;
     #sh:description "..." ;
-    sh:order "0"^^xsd:decimal ;    
+    sh:order 0 ;    
     sh:path schema:name ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -30,7 +30,7 @@ landrs:sensorShape
     sh:property [
     sh:name "Description" ;
     #sh:description "..." ;
-    sh:order "1"^^xsd:decimal ;
+    sh:order 1 ;
     sh:path schema:description ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -40,7 +40,7 @@ landrs:sensorShape
   sh:property [
     sh:name "Identifier" ;
     #sh:description "..." ;
-    sh:order "2"^^xsd:decimal ;
+    sh:order 2 ;
     sh:path schema:identifier ;
     sh:or ( [ sh:datatype xsd:string ; ]
       [ sh:datatype xsd:anyURI ; ] );
@@ -51,7 +51,7 @@ landrs:sensorShape
   sh:property [
     sh:name "Flight Controller Board" ;
     sh:description "Platform that the sensor is mounted on or hosted by." ;
-    sh:order "3"^^xsd:decimal ;    
+    sh:order 3 ;    
     sh:path sosa:isHostedBy ;
     sh:NodeKind sh:IRI ;
     sh:class landrs:FlightControllerBoard;
@@ -60,7 +60,7 @@ landrs:sensorShape
 sh:property [
     sh:name "Property that we observe" ;
     sh:description "The abbreviation of the state or territory." ;    
-    sh:order "4"^^xsd:decimal ;
+    sh:order 4 ;
     sh:path sosa:observes ;
     sh:NodeKind sh:IRI ;
     sh:class sosa:ObservableProperty ;
@@ -69,7 +69,7 @@ sh:property [
   sh:property [
     sh:name "Sensor's operating range" ;
     sh:description "Describes normal operating properties of a system under some specific conditions." ;    
-    sh:order "5"^^xsd:decimal ;
+    sh:order 5 ;
     sh:path ssn-system:hasOperatingRange  ;
     sh:NodeKind sh:IRI ;
     sh:class ssn-system:OperatingRange ;
