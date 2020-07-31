@@ -1,0 +1,73 @@
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+
+
+####
+# Place
+####
+landrs:PlaceShape
+a sh:NodeShape ;
+sh:targetClass landrs:Place ;
+# mandatory properties
+sh:property [
+    sh:path schema:name ;
+    sh:datatype xsd:string ;
+    sh:name "Name" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;     
+    sh:severity sh:Warning ;
+    sh:order 0 ;
+] ;
+sh:property [
+    sh:path schema:description ;
+    sh:or ( [ sh:datatype xsd:string ; ]
+        [ sh:datatype rdf:langString ; ] );
+    sh:name "Description" ;     
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:severity sh:Warning ;
+    sh:order 1 ;
+] ;
+sh:property [
+    sh:path landrs:hasSpatialFootprint ;
+    sh:NodeKind sh:IRI ;
+    sh:class geosparql:Geometry ;
+    sh:name "Geographical area" ;
+    sh:description """ http://www.opengis.net/ont/geosparql#Geometry """ ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:severity sh:Violation ;
+    sh:order 2 ;
+] .
+
+
+####
+# Place
+####
+geosparql:GeometryShape
+a sh:NodeShape ;
+sh:targetClass geosparql:Geometry ;
+# mandatory properties
+sh:property [
+    sh:path locn:geometry ;
+    sh:datatype geosparql:asWKT ;
+    sh:name "Geographical area" ;
+    sh:description """Geometry field http://www.opengis.net/ont/geosparql#asWKT """ ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;     
+    sh:severity sh:Warning ;
+    sh:order 0 ;
+] .

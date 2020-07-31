@@ -43,7 +43,7 @@ sh:property [
      sh:or ( [ sh:datatype xsd:string ; ]
           [ sh:datatype xsd:anyURI ; ] );
      sh:name "Identifier" ;
-     sh:description "The identifier property represents any kind of identifier for any kind of schema:Thing, such as ISBNs, GTIN codes, UUIDs etc.." ;
+     sh:description "The identifier property represents any kind of identifier for any kind of schema:Thing, such as ISBNs, GTIN codes, UUIDs etc." ;
      sh:minCount 1 ;
      sh:maxCount 1 ;
      sh:severity sh:Violation ;

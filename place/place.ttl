@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix sf: <http://www.opengis.net/ont/sf#> .
 @prefix schema: <http://schema.org/> .
@@ -23,18 +24,23 @@
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
 
-<id/MTRGQTVCMzktRjE1RS00MjI2LUIwMDQtRUQ0Q0REMzhDMDc3Cg==> a landrs:Flight ;
-    schema:identifier "A0001" ;
-    schema:name "A0001" ;
-    schema:description "First Flight" ;
-    landrs:isUndertakenBy <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> ; # landrs:UAV    
-    landrs:occursAtPlace <id/RjNBN0NFRDgtMTkxNS00MjJELUEyRDQtRThCRjQ2OEM3QjdGCg==> ; # landrs:Place 
-    landrs:occursAtTime <id/MTA5OTQ1OTItNEMyNC00NUQ1LTk5Q0ItMEI2NzA5QkFCNkE0Cg==>. #landrs:TimeEntity
 
-<id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a landrs:UAV .
+<id/RjNBN0NFRDgtMTkxNS00MjJELUEyRDQtRThCRjQ2OEM3QjdGCg==> a landrs:Place ;
+    schema:name "Anne Frank's house" ;
+    schema:description "A place whose spatial coverage corresponds to Anne Frank's house in Amsterdam, specified as a polygon (the coordinate reference system is CRS84)." ;    
+    landrs:hasSpatialFootprint <id/M0UzQjM1OUUtQzAzMC00RDJCLThDOEMtMjQyNTYwQUNENUQxCg==> .
 
-<id/RjNBN0NFRDgtMTkxNS00MjJELUEyRDQtRThCRjQ2OEM3QjdGCg==> a landrs:Place .
-
-<id/MTA5OTQ1OTItNEMyNC00NUQ1LTk5Q0ItMEI2NzA5QkFCNkE0Cg==> a landrs:TimeEntity .
-
+<id/M0UzQjM1OUUtQzAzMC00RDJCLThDOEMtMjQyNTYwQUNENUQxCg==> a geosparql:Geometry ;    
+    locn:geometry """POLYGON ((
+        4.8842353 52.375108 , 4.884276 52.375153 ,
+        4.8842567 52.375159 , 4.883981 52.375254 ,
+        4.8838502 52.375109 , 4.883819 52.375075 ,
+        4.8841037 52.374979 , 4.884143 52.374965 ,
+        4.8842069 52.375035 , 4.884263 52.375016 ,
+        4.8843200 52.374996 , 4.884255 52.374926 ,
+        4.8843289 52.374901 , 4.884451 52.375034 ,
+        4.8842353 52.375108
+    ))"""^^geosparql:asWKT .
+    

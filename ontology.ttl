@@ -5,6 +5,7 @@
 @prefix cor: <http://purl.org/ieee1872-owl/cora-bare#>.
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix dbr:  <http://dbpedia.org/resource/> .
@@ -34,6 +35,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl-Time: <http://www.w3.org/2006/time#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix geoschemas: <http://geoschemas.org/> .
 @prefix cpo: <http://daselab.org/ContextualizedWinstonPartWhole#> .
 @prefix po: <http://daselab.org/WinstonPartWhole#> .
 
@@ -203,11 +205,11 @@ landrs:TimeEntity rdf:type owl:Class ;
 ###  http://schema.landrs.org/schema/Flight
 landrs:Flight rdf:type rdfs:Class, owl:Class;
   rdfs:subClassOf prov:Activity ,
-                  schema:Event ;            
+                  schema:Event ;
   rdfs:label "Flight" .
 
 ###  https://schema.landrs.org/schema/Event
-landrs:Event rdf:type rdfs:Class, owl:Class;              
+landrs:Event rdf:type rdfs:Class, owl:Class;
   rdfs:subClassOf schema:Event ;
   rdfs:comment "An event happening at a certain time and location, such as a flight or mission. Repeated events may be structured as separate Event objects."@en ;
   rdfs:label "Event"@en .
@@ -220,7 +222,7 @@ landrs:Agent rdf:type owl:Class ;
 ###  http://schema.landrs.org/schema/Place
 landrs:Place rdf:type rdfs:Class, owl:Class ;
   rdfs:subClassOf schema:Thing ,
-                  dcat:Location ;
+                  dct:Location ;
   rdfs:label "Place" .
 
 ###  http://schema.landrs.org/schema/Condition

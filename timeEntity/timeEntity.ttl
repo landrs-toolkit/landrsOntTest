@@ -1,0 +1,23 @@
+
+@prefix landrs: <http://schema.landrs.org/schema/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix ssn-ext: <http://www.w3.org/ns/ssn/ext/> .
+@prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+
+
+<id/MTA5OTQ1OTItNEMyNC00NUQ1LTk5Q0ItMEI2NzA5QkFCNkE0Cg==> a landrs:TimeEntity ;
+    # time:hasBeginning [ time:inXSDDateTime "2016-09-10T12:00:00Z"^^xsd:dateTime ] ;
+    time:hasBeginning "2096-09-10T12:00:00Z"^^xsd:dateTime  ;
+    time:hasEnd "2019-09-10T13:00:00Z"^^xsd:dateTime   .
