@@ -122,3 +122,20 @@ sh:property [
 #     sh:resultSeverity sh:Violation ;
 #     sh:order 0 ;
 #] .
+
+####
+# Organization
+####
+schema:OrganizationShape
+a sh:NodeShape ;
+sh:targetClass schema:Organization ;
+# mandatory properties
+sh:property [
+     sh:path schema:name ;
+     sh:name "Name" ;
+     sh:minCount 1 ;
+     sh:maxCount 1 ;
+     sh:datatype xsd:string ;
+     sh:severity sh:Violation ;
+     sh:order 0 ;
+] .

@@ -32,7 +32,8 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
+@prefix owl-Time: <http://www.w3.org/2006/time#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix cpo: <http://daselab.org/ContextualizedWinstonPartWhole#> .
 @prefix po: <http://daselab.org/WinstonPartWhole#> .
 
@@ -80,6 +81,11 @@ schema:version a owl:AnnotationProperty .
     dcat:mediaType <https://www.iana.org/assignments/media-types/application/n-triples>
   ] .
 
+
+#################################################################
+#    Classes
+#################################################################
+
 #### Classes Derived from Schema.org
 landrs:Thing a rdfs:Class ;
   rdfs:label "Thing"@en ;
@@ -119,12 +125,6 @@ landrs:ProductModel a rdfs:Class ;
   schema:sameAs schema:ProductModel ;
   owl:equivalentClass schema:ProductModel .
 
-landrs:Actuator a rdfs:Class ;
-  rdfs:label "Actuator"@en ;
-  rdfs:comment "A device that is used by, or implements, an (actuating) Procedure. Actuators change the state of the world."@en ;
-  rdfs:subClassOf sosa:Actuator ;  
-  rdfs:subClassOf landrs:Product .
-
 landrs:QuantitativeValue a rdfs:Class ;
     rdfs:label "QuantitativeValue" ;
     schema:sameAs schema:QuantitativeValue ;
@@ -148,7 +148,6 @@ landrs:StructuredValue a rdfs:Class ;
     owl:equivalentClass schema:StructuredValue ;
     rdfs:comment "Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing." ;
     rdfs:subClassOf landrs:Intangible .
-
 
 landrs:Vehicle a rdfs:Class ;
   rdfs:label "Vehicle"@en ;
@@ -189,151 +188,73 @@ landrs:ActuableSignal a rdfs:Class, owl:Class;
   rdfs:label "Actuable signal"@en;
   rdfs:comment "All actuable signals that can dynamically be updated by the vehicle"@en.
 
+###  http://schema.landrs.org/schema/ObservationDataset
+landrs:ObservationDataset rdf:type owl:Class ;
+  rdfs:subClassOf dcat:Dataset ,
+    prov:Entity ;
+  rdfs:label "ObservationDataset" .
+  # skos:note <https://www.w3.org/TR/vocab-dcat-2/#ex-service-gsa> .
+
+###  http://schema.landrs.org/schema/TimeEntity
+landrs:TimeEntity rdf:type owl:Class ;
+  rdfs:subClassOf owl-Time:TemporalEntity ;
+  rdfs:label "TimeEntity" .
+
 ###  http://schema.landrs.org/schema/Flight
-landrs:Flight rdf:type  rdfs:Class, owl:Class;
-              rdfs:subClassOf prov:Activity ,
-                              schema:Event ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty landrs:providesAgentRole ;
-                                owl:someValuesFrom landrs:AgentRole
-                              ] ;                              
-              prov:wasAssociatedWith landrs:UAV, landrs:Sensor ;
-              rdfs:label "Flight" .          
+landrs:Flight rdf:type rdfs:Class, owl:Class;
+  rdfs:subClassOf prov:Activity ,
+                  schema:Event ;            
+  rdfs:label "Flight" .
 
 ###  https://schema.landrs.org/schema/Event
-landrs:Event  rdf:type rdfs:Class, owl:Class;
-              owl:equivalentClass dctype:Event ; ## (not sure)
-              rdfs:subClassOf schema:Event ;
-              rdfs:comment "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the offers property. Repeated events may be structured as separate Event objects."@en ;
-              rdfs:label "Event"@en .
-
-###  https://schema.landrs.org/schema/AgentRole
-landrs:AgentRole  rdf:type rdfs:Class, owl:Class;
-                  rdfs:subClassOf
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty landrs:isInformedBy ;
-                                    owl:someValuesFrom landrs:Agent
-                                  ] ;                        
-                  rdfs:label "AgentRole" .
+landrs:Event rdf:type rdfs:Class, owl:Class;              
+  rdfs:subClassOf schema:Event ;
+  rdfs:comment "An event happening at a certain time and location, such as a flight or mission. Repeated events may be structured as separate Event objects."@en ;
+  rdfs:label "Event"@en .
 
 ###  https://schema.landrs.org/schema/Agent
-landrs:Agent  rdf:type owl:Class ;
-              rdfs:subClassOf prov:Agent ;
-              rdfs:label "Agent" .
-
-###  https://schema.landrs.org/schema/Researcher
-landrs:Researcher rdf:type owl:Class ;
-                  rdfs:subClassOf landrs:AgentRole ;
-                  rdfs:label "Researcher" .
-
-###  https://schema.landrs.org/schema/UxVOperator
-landrs:UxVOperator  rdf:type owl:Class, prov:SoftwareAgent ;
-                    rdfs:subClassOf landrs:Agentrole ;
-                    rdfs:label "UxVOperator" .
-
-###  https://schema.landrs.org/schema/isInformedBy
-landrs:isInformedBy rdf:type owl:ObjectProperty ;
-                    rdfs:domain landrs:AgentRole ;
-                    rdfs:range landrs:Agent ;
-                    rdfs:label "isInformedBy" .
-
-###  http://schema.landrs.org/schema/providesAgentRole
-landrs:providesAgentRole  rdf:type owl:ObjectProperty ;
-                                rdfs:domains landrs:Flight ;
-                                rdfs:range landrs:AgentRole ;
-                                rdfs:label "providesAgentRole" .
+landrs:Agent rdf:type owl:Class ;
+  rdfs:subClassOf prov:Agent ;
+  rdfs:label "Agent" .
 
 ###  http://schema.landrs.org/schema/Place
-landrs:Place  rdf:type rdfs:Class, owl:Class ;
-              rdfs:subClassOf schema:Place ;
-              rdfs:label "Place"@en .
+landrs:Place rdf:type rdfs:Class, owl:Class ;
+  rdfs:subClassOf schema:Thing ,
+                  dcat:Location ;
+  rdfs:label "Place" .
 
-###  https://schema.org/location
-schema:location rdf:type owl:ObjectProperty ;
-                rdfs:domain landrs:Event ;
-                rdfs:range landrs:Place ;
-                rdfs:label "location" .                  
+###  http://schema.landrs.org/schema/Condition
+landrs:Condition rdf:type rdfs:Class, owl:Class ;
+  rdfs:subClassOf ssn-system:Condition ,
+                  schema:PropertyValue ;
+  rdfs:label "Condition" .
 
-###  https://schema.landrs.org/schema/FlightPlanAssociation
-landrs:FlightPlanAssociation  rdf:type rdfs:Class, owl:Class ;
-                              rdfs:label "FlightPlanAssociation" .
-
-###  https://schema.landrs.org/schema/qualifiedAssociation
-landrs:qualifiedAssociation rdf:type rdf:Property, owl:ObjectProperty ;
-                            rdfs:domain landrs:Flight ;
-                            rdfs:range landrs:FlightplanAssociation ;
-                            rdfs:label "qualifiedAssociation" . 
-
-###  https://schema.landrs.org/schema/DataAquisition
-landrs:DataAquisition rdf:type owl:Class, rdfs:Class ;
-                      rdfs:subClassOf prov:Activity ,
-                                      [ rdf:type owl:Restriction ;
-                                        owl:onProperty prov:qualifiedAssociation ;
-                                        owl:someValuesFrom landrs:DataPlanAssociation
-                                      ] ;                    
-                      prov:wasInformedBy landrs:Flight ;
-                      prov:used landrs:ObservationCollection ;
-                      # prov:wasAssociatedWith landrs:Sensor;
-                      # prov:wasAssociatedWith landrs:UAV;
-                      rdfs:label "DataAquisition" .
-
-###  http://schema.landrs.org/schema/DataPlanAssociation
-landrs:DataPlanAssociation  rdf:type  owl:Class, rdfs:Class ;
-                            rdfs:subClassOf prov:Association ,
-                                            [ rdf:type owl:Restriction ;
-                                              owl:onProperty landrs:hadPlan ;
-                                              owl:someValuesFrom landrs:DataCapturePlan
-                                            ] ;
-                            rdfs:label "DataPlanAssociation" .
-
-###  https://schema.landrs.org/schema/DataCaptureplan
-landrs:DataCaptureplan  rdf:type owl:Class ;
-                        rdfs:subClassOf prov:Plan ;
-                        rdfs:label "DataCapturePlan" .
-
-### =============== 
-landrs:Condition  rdf:type rdfs:Class, owl:Class ;
-                  rdfs:subClassOf ssn-system:Condition ,
-                                  schema:PropertyValue ;
-                  rdfs:label "Condition" .
-
-### =============== ObservationCollection
-
-###  https://schema.landrs.org/schema/ObservationCollection
-landrs:ObservationCollection  rdf:type rdfs:Class, owl:Class;
-                              rdfs:subClassOf dcat:Dataset ,
-                                              prov:Entity ,
-                                              ssn-ext:ObservationCollection ;
-                              dcat:distribution landrs:DroneDataDistribution ;
-                              prov:wasGeneratedBy landrs:DataAquisition ;    
-                              prov:wasUsedBy landrs:DataAquisition ;
-                              prov:wasAtributedTo landrs:Sensor ; 
-                              sosa:madeBySensor landrs:Sensor ;    
-                              rdfs:label "ObservationCollection" .
-
-###  https://schema.landrs.org/schema/DroneDataDistribution
-landrs:DroneDataDistribution  rdf:type owl:Class ;
-                              rdfs:subClassOf dcat:Distribution ;
-                              rdfs:label "DroneDataDistribution" .
+###  https://schema.landrs.org/schema/Actuator
+landrs:Actuator rdf:type rdfs:Class ;
+  rdfs:label "Actuator"@en ;
+  rdfs:comment "A device that is used by, or implements, an (actuating) Procedure. Actuators change the state of the world."@en ;
+  rdfs:subClassOf sosa:Actuator ,
+  landrs:Product ;
+  rdfs:label "Actuator" .
 
 ### Classes derived from SWARMs
-landrs:AerialVehicle  rdf:type  rdfs:Class ;
-                      rdfs:label "Aerial Vehicle"@en ;
-                      rdfs:comment "A machine that is able to fly by gaining support from the air other than the reactions of the air against the earth’s surface" ;
-                      rdfs:comment "Synonym with Aircraft" ;
-                      rdfs:subClassOf landrs:Vehicle ;
-                      rdfs:subClassOf wd:Q11436 ;
-                      rdfs:subClassOf eqp:Aircraft .
+landrs:AerialVehicle rdf:type  rdfs:Class ;
+  rdfs:label "Aerial Vehicle"@en ;
+  rdfs:comment "A machine that is able to fly by gaining support from the air other than the reactions of the air against the earth’s surface" ;
+  rdfs:comment "Synonym with Aircraft" ;
+  rdfs:subClassOf landrs:Vehicle ;
+  rdfs:subClassOf wd:Q11436 ;
+  rdfs:subClassOf eqp:Aircraft .
 
-landrs:UnderwaterVehicle  rdf:type rdfs:Class ;
-                          rdfs:label "Underwater Vehicle"@en ;
-                          rdfs:subClassOf landrs:Vehicle ;
-                          prov:wasDerivedFrom [
-                                                a prov:Entity ;
-                                                dcterms:source <https://www.mdpi.com/185614> ;
-                                                schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
-                                                dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
-                                              ] .
+landrs:UnderwaterVehicle rdf:type rdfs:Class ;
+  rdfs:label "Underwater Vehicle"@en ;
+  rdfs:subClassOf landrs:Vehicle ;
+  prov:wasDerivedFrom [
+    a prov:Entity ;
+    dcterms:source <https://www.mdpi.com/185614> ;
+    schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
+    dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
+    ] .
 
 landrs:SurfaceVehicle a rdfs:Class ;
   rdfs:label "Surface Vehicle"@en ;
@@ -453,8 +374,6 @@ landrs:AerialRobot a rdfs:Class ;
   rdfs:subClassOf landrs:RoboticVehice ;
   rdfs:subClassOf landrs:AerialVehicle .
 
-
-
 landrs:AUV a rdfs:Class ;
   rdfs:label "Autonomous Underwater Vehicle"@en ;
   skos:altLabel "AUV"@en ;
@@ -481,7 +400,6 @@ landrs:ROV a rdfs:Class ;
     schema:identifier "https://dx.doi.org/10.3390%2Fs17030569" ;
     dcterms:title "SWARMs Ontology: A Common Information Model for the Cooperation of Underwater Robots"@en
   ] .
-
 
 landrs:UnderwaterGlider a rdfs:Class ;
   rdfs:label "Underwater Glider"@en ;
@@ -559,20 +477,22 @@ landrs:UxV a rdfs:Class ;
   rdfs:subClassOf landrs:Agent ;
   owl:equivalentClass wd:Q1527901 .
 
-
-landrs:UAV a rdfs:Class ;
+###  http://schema.landrs.org/schema/UAV
+landrs:UAV a rdfs:Class, owl:Class ;
   rdfs:label "Unmanned Aerial Vehicle"@en ;
   rdfs:comment "An aircraft without a human pilot on board and a type of unmanned vehicle. UAVs are a component of an unmanned aircraft system (UAS); which include a UAV, a ground-based controller, and a system of communications between the two. The flight of UAVs may operate with various degrees of autonomy: either under remote control by a human operator or autonomously by onboard computers." ;
   skos:prefLabel "Unmanned Aerial Vehicle"@en ;
   skos:altLable "UAV"@en ;
-  rdfs:subClassOf landrs:UxV ;
-  rdfs:subClassOf eqp:Aircraft ;
-  rdfs:subClassOf landrs:AerialRobot ;
-  rdfs:subClassOf landrs:MotorizedVehicle ;
-  rdfs:subClassOf <http://vocab.nerc.ac.uk/collection/L06/current/6D/> ;
-  rdfs:subClassOf <https://mmisw.org/ont/ioos/platform/unmanned_aerial_vehicle> ;
-  rdfs:subClassOf wd:Q484000 ;
-  rdfs:subClassOf dbr:Unmanned_aerial_vehicle ;
+  rdfs:subClassOf landrs:UxV ,
+                  eqp:Aircraft ,
+                  landrs:AerialRobot ,
+                  landrs:MotorizedVehicle ,
+                  <http://vocab.nerc.ac.uk/collection/L06/current/6D/> ,
+                  <https://mmisw.org/ont/ioos/platform/unmanned_aerial_vehicle> ,
+                  wd:Q484000 ,
+                  dbr:Unmanned_aerial_vehicle ,
+                  sosa:FeatureOfInterest ,
+                  sosa:Platform ;
   landrs:component landrs:UAS .
 
 landrs:UAS a rdfs:Class ;
@@ -621,7 +541,6 @@ landrs:UAVComponent a rdfs:Class ;
   rdfs:subClassOf landrs:Component ;
   rdfs:subClassOf wd:Q28816538 .
 
-
 landrs:Body a rdfs:Class, landrs:UAVComponent ;
   rdfs:label "UxV Body"@en ;
   rdfs:comment "Body of the UxV, for a UAV this would be an airframe"@en ;
@@ -631,18 +550,6 @@ landrs:Body a rdfs:Class, landrs:UAVComponent ;
     rdf:type landrs:Component, landrs:UAVComponent;
     landrs:hasWhole landrs:UxV
   ] .
-
-
-landrs:bodyType a rdf:Property ;
-    rdfs:label "bodyType"@en ;
-    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group> ;
-    schema:domainIncludes schema:Vehicle ;
-    schema:isPartOf <http://auto.schema.org> ;
-    schema:rangeIncludes schema:QualitativeValue,
-        schema:Text,
-        schema:URL ;
-    rdfs:comment "Indicates the design and body style of the vehicle (e.g. quadcopter, glider."@en .
-
 
 landrs:Airframe a rdfs:Class ;
   rdfs:label "Airframe"@en ;
@@ -665,7 +572,6 @@ landrs:Autopilot a rdfs:Class ;
     rdf:type landrs:Component ;
     landrs:hasWhole landrs:FlightControlSystem
   ] .
-
 
 landrs:Payload a rdfs:Class ;
   rdfs:label "Payload"@en ;
@@ -724,12 +630,25 @@ landrs:Mission a rdfs:Class, landrs:Event, atm:Flight ;
   rdfs:subClassOf wd:Q13425175 .
 
 
+#################################################################
+#    Object Properties
+#################################################################
+
+landrs:bodyType a rdf:Property ;
+    rdfs:label "bodyType"@en ;
+    dcterms:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group> ;
+    schema:domainIncludes schema:Vehicle ;
+    schema:isPartOf <http://auto.schema.org> ;
+    schema:rangeIncludes schema:QualitativeValue,
+        schema:Text,
+        schema:URL ;
+    rdfs:comment "Indicates the design and body style of the vehicle (e.g. quadcopter, glider."@en .
+
 landrs:component a rdf:Property, owl:ObjectProperty ;
   rdfs:label "Winston ODP Component p"@en ;
   rdfs:comment "Winston Component part-of relation po-component"@en ;
   owl:equivalentClass po:po-component ;
   opla:isNativeTo <https://raw.githubusercontent.com/cogan-shimizu-wsu/WinstonPartWhole/master/WinstonPartWhole.owl> .
-
 
 landrs:isPartOf a rdf:Property, owl:ObjectProperty ;
   rdfs:label "component"@en;
@@ -751,7 +670,6 @@ landrs:hasWhole a rdf:Property, owl:ObjectProperty ;
   schema:inverseOf landrs:isPartOf ;
   owl:inverseOf landrs:isPartOf ;
   opla:isNativeTo <https://raw.githubusercontent.com/cogan-shimizu-wsu/ContextualizedWinstonPartWhole/master/ContextualizedWinstonPartWhole.owl> .
-
 
 landrs:isVariantOf a rdf:Property ;
     rdfs:label "isVariantOf" ;
@@ -791,7 +709,6 @@ landrs:category a rdf:Property ;
         <https://github.com/schemaorg/schemaorg/issues/2490> ;
     schema:category "issue-1741" ;
     schema:domainIncludes landrs:Product ;
-
     schema:rangeIncludes schema:Text,
         schema:Thing ;
     rdfs:comment "A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy." .
@@ -827,7 +744,6 @@ landrs:isSimilarTo a rdf:Property ;
     schema:domainIncludes schema:Product;
     schema:rangeIncludes schema:Product;
     rdfs:comment "A pointer to another, functionally similar product (or multiple products)." .
-
 
 landrs:depth a rdf:Property ;
     rdfs:label "depth" ;
@@ -896,7 +812,6 @@ landrs:width a rdf:Property ;
         schema:QuantitativeValue ;
     rdfs:comment "The width of the item." .
 
-
 ## Properties from VSSO
 vsso:partOfBranch a owl:ObjectProperty, owl:TransitiveProperty, rdf:Property;
   rdfs:label "part of"@en;
@@ -936,3 +851,27 @@ landrs:hasProtocol a owl:ObjectProperty, rdf:Property ;
   schema:rangeIncludes landrs:signalProtocol ;
   rdfs:domain landrs:Signal ;
   rdfs:range landrs:SignalProtocol .
+
+###  http://schema.landrs.org/schema/isUndertakenBy
+landrs:isUndertakenBy rdf:type rdf:Property, owl:ObjectProperty ;
+  rdfs:domain landrs:Flight ;
+  rdfs:range landrs:UAV ;
+  rdfs:label "isUndertakenBy" .
+
+###  http://schema.landrs.org/schema/occursAtTime
+landrs:occursAtTime rdf:type rdf:Property, owl:ObjectProperty ;
+  rdfs:domain landrs:Event ;
+  rdfs:range landrs:TimeEntity ;
+  rdfs:label "occursAtTime" .
+
+###  http://schema.landrs.org/schema/occursAtPlace
+landrs:occursAtPlace rdf:type owl:ObjectProperty ;
+  rdfs:domain landrs:Event ;
+  rdfs:range landrs:Place ;
+  rdfs:label "occursAtPlace" .
+
+###  http://schema.landrs.org/schema/hasSpatialFootprint
+landrs:hasSpatialFootprint rdf:type owl:ObjectProperty ;
+  rdfs:domain landrs:Place ;
+  rdfs:range geosparql:Geometry ;
+  rdfs:label "hasSpatialFootprint" .
