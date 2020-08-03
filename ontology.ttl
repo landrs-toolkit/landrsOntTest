@@ -33,7 +33,7 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix owl-Time: <http://www.w3.org/2006/time#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix geoschemas: <http://geoschemas.org/> .
 @prefix cpo: <http://daselab.org/ContextualizedWinstonPartWhole#> .
@@ -199,7 +199,7 @@ landrs:ObservationDataset rdf:type owl:Class ;
 
 ###  http://schema.landrs.org/schema/TimeEntity
 landrs:TimeEntity rdf:type owl:Class ;
-  rdfs:subClassOf owl-Time:TemporalEntity ;
+  rdfs:subClassOf time:TemporalEntity ;
   rdfs:label "TimeEntity" .
 
 ###  http://schema.landrs.org/schema/Flight
@@ -631,6 +631,22 @@ landrs:Mission a rdfs:Class, landrs:Event, atm:Flight ;
   rdfs:comment "Event associated with the deployment of a UxV"@en;
   rdfs:subClassOf wd:Q13425175 .
 
+###  http://schema.landrs.org/schema/ObservationDataset
+landrs:ObservationDataset rdf:type owl:Class ;
+  rdfs:subClassOf dcat:Dataset ,
+                  prov:Entity ;
+  rdfs:label "ObservationDataset" .
+
+### sosa classes
+###  http://www.w3.org/ns/sosa/ObservationCollection
+sosa:ObservationCollection rdf:type owl:Class ;
+  rdfs:subClassOf prov:Activity ;
+  rdfs:label "ObservationCollect" .
+
+###  http://www.w3.org/ns/sosa/Observation
+sosa:Observation rdf:type owl:Class ;
+  rdfs:subClassOf prov:Activity ;
+  rdfs:label "Observation" .                   
 
 #################################################################
 #    Object Properties

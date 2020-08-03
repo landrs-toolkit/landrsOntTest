@@ -30,7 +30,7 @@
 <id/RjNBN0NFRDgtMTkxNS00MjJELUEyRDQtRThCRjQ2OEM3QjdGCg==> a landrs:Place ;
     schema:name "Anne Frank's house" ;
     schema:description "A place whose spatial coverage corresponds to Anne Frank's house in Amsterdam, specified as a polygon (the coordinate reference system is CRS84)." ;    
-    landrs:hasSpatialFootprint <id/M0UzQjM1OUUtQzAzMC00RDJCLThDOEMtMjQyNTYwQUNENUQxCg==> .
+    landrs:hasSpatialFootprint <id/M0UzQjM1OUUtQzAzMC00RDJCLThDOEMtMjQyNTYwQUNENUQxCg==> . #geosparql:Geometry
 
 <id/M0UzQjM1OUUtQzAzMC00RDJCLThDOEMtMjQyNTYwQUNENUQxCg==> a geosparql:Geometry ;    
     locn:geometry """POLYGON ((
