@@ -93,12 +93,60 @@ schema:minValue "10"^^xsd:decimal ;
 schema:maxValue "1200"^^xsd:decimal ;
 schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#MilliBAR>
 
-<http://sweetontology.net/propSpaceHeight#BarometricAltitude> a sosa:ObservableProperty .
+<http://sweetontology.net/propSpaceHeight#BarometricAltitude> a sosa:ObservableProperty ;
+    rdfs:label "barometric altitude" .
 
-<http://sweetontology.net/propSpaceDirection#Orientation> a sosa:ObservableProperty .
+<http://sweetontology.net/propSpaceDirection#Orientation> a sosa:ObservableProperty ;
+    rdfs:label "orientation" .
 
-<http://sweetontology.net/propSpeed#Acceleration> a sosa:ObservableProperty .
+<http://sweetontology.net/propSpeed#Acceleration> a sosa:ObservableProperty ;
+    rdfs:label "acceleration" .
 
-<http://sweetontology.net/propSpaceLocation#Position> a sosa:ObservableProperty .
+<http://sweetontology.net/propSpaceLocation#Position> a sosa:ObservableProperty ;
+    rdfs:label "position" .
 
 <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> a landrs:FlightControllerBoard .
+
+###################################################################################
+# Chris scratchpad, lets define what I am trying to measure for atmospheric gasses
+###################################################################################
+
+<http://dbpedia.org/resource/Atmosphere_of_Earth> a sosa:FeatureOfInterest ;
+    rdfs:label "Earth atmosphere" ;
+    rdfs:description "The Earth’s atmosphere" ;
+    ssn:hasProperty <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> ;
+    ssn:hasProperty <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:17045> .
+
+<https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> rdf:type sosa:ObservableProperty ;
+    rdfs:label "atmospheric CO2" ;
+    rdfs:description "atmospheric carbon dioxide" ;
+    ssn:isPropertyOf <http://dbpedia.org/resource/Atmosphere_of_Earth> .
+
+<https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:17045> rdf:type sosa:ObservableProperty ;
+    rdfs:label "atmospheric N2O" ;
+    rdfs:description "atmospheric dinitrogen oxide" ;
+    ssn:isPropertyOf <http://dbpedia.org/resource/Atmosphere_of_Earth> .
+
+<id/yACpCy_GTHyAY44Eu1TY1A> a ssn-system:OperatingRange ;
+    rdfs:comment "The conditions in which the CO2 sensor is expected to operate."@en ;
+    ssn-system:inCondition <NormalOperatingCondition> .
+
+<id/CfJDfMLMTu2ZcfMcGADlYg> a landrs:Sensor;
+    rdfs:label "CO2-1431 CO2 Sensor" ;
+    schema:name "CO2-1431 CO2 Sensor" ;
+    rdfs:comment "CO2 ppm sensor optimized for drone use" ;
+    schema:description "CO2 ppm sensor optimized for drone use" ;
+    schema:identifier "CO2-1431" ;
+    schema:sameAs <https://cdn.shopify.com/s/files/1/0019/5952/files/Datasheet_COZIR_A_CO2Meter_4_15.pdf> ;
+    wdt:P31 wdt:Q216198 ;
+    sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
+    sosa:observes <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> ;
+    ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> .
+
+<id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a sosa:FeatureOfInterest ;
+    rdfs:label "This drone" ;
+    ssn:hasProperty <http://sweetontology.net/propSpaceHeight#BarometricAltitude> ;
+    ssn:hasProperty <http://sweetontology.net/propSpeed#Acceleration> ;
+    ssn:hasProperty <http://sweetontology.net/propSpaceLocation#Position> ;
+    ssn:hasProperty <http://sweetontology.net/propSpaceDirection#Orientation> .
+    
