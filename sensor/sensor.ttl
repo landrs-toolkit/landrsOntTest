@@ -27,7 +27,8 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> a landrs:Sensor ;
 rdfs:label "Bosh Sensortec 6-axis inertial measurement unit"@en ;
@@ -149,4 +150,16 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
     ssn:hasProperty <http://sweetontology.net/propSpeed#Acceleration> ;
     ssn:hasProperty <http://sweetontology.net/propSpaceLocation#Position> ;
     ssn:hasProperty <http://sweetontology.net/propSpaceDirection#Orientation> .
-    
+
+<http://orcid.org/0000-0001-8214-7177/> a prov:Agent, prov:Person;
+       foaf:givenName "Chris Sweet"^^xsd:string ;
+       rdfs:label "Chris Sweet" .
+
+<https://www.wikidata.org/wiki/Q81060355> a prov:Role ;
+    rdfs:label "UAV pilot" .
+
+<id/CfJDfMLMTu2ZcfMcGADlYg> a prov:Association;
+    prov:Agent   <http://orcid.org/0000-0003-0782-2704/> ;
+    prov:hadRole <https://www.wikidata.org/wiki/Q81060355> ;
+    # prov:hadPlan :style-guide ;
+    rdfs:comment "Piloting the drone."@en .
