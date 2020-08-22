@@ -129,7 +129,7 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
     ssn:isPropertyOf <http://dbpedia.org/resource/Atmosphere_of_Earth> .
 
 <id/yACpCy_GTHyAY44Eu1TY1A> a ssn-system:OperatingRange ;
-    rdfs:comment "The conditions in which the CO2 sensor is expected to operate."@en ;
+    rdfs:comment "The conditions in which the NO2/CO2 sensor is expected to operate."@en ;
     ssn-system:inCondition <NormalOperatingCondition> .
 
 <id/CfJDfMLMTu2ZcfMcGADlYg> a landrs:Sensor;
@@ -142,7 +142,21 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
     wdt:P31 wdt:Q216198 ;
     sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
     sosa:observes <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> ;
-    ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> .
+    ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> ;
+    qudt-1-1:hasUnit qudt-unit-1-1:PPM .
+
+<id/YaUJ-iY3TM-xDK5pSj0gbg> a landrs:Sensor;
+    rdfs:label "NO2-2431 NO2 Sensor" ;
+    schema:name "NO2-2431 NO2 Sensor" ;
+    rdfs:comment "NO2 ppm sensor optimized for drone use" ;
+    schema:description "NO2 ppm sensor optimized for drone use" ;
+    schema:identifier "NO2-2431" ;
+    schema:sameAs <https://cdn.shopify.com/s/files/1/0019/5952/files/Datasheet_COZIR_A_CO2Meter_4_15.pdf> ;
+    wdt:P31 wdt:Q216198 ;
+    sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
+    sosa:observes <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:17045> ;
+    ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> ;
+    qudt-1-1:hasUnit qudt-unit-1-1:PPM .
 
 <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a sosa:FeatureOfInterest ;
     rdfs:label "This drone" ;
