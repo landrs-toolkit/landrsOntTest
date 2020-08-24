@@ -1,6 +1,7 @@
 @prefix landrs: <http://schema.landrs.org/schema/> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix eqp: <https://data.nasa.gov/ontologies/atmonto/equipment#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
@@ -14,4 +15,7 @@ schema:Brand "DJI"@en .
 #landrs:component <id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> .
 
 # ToDo: Write a example of landrs:UAS.
-#<id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> a landrs:UAS .
+<id/QTlFNzhFNzEtQjEzNC00NzZFLTkwRDMtNzFEOENBMkVCRThECg==> a landrs:UAS ;
+rdfs:label "RFD900x-US" ;
+rdfs:comment "Communications System" ;
+skos:prefLabel "GBC and communication system" .
