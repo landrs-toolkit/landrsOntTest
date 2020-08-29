@@ -116,7 +116,13 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
     rdfs:label "Earth atmosphere" ;
     rdfs:description "The Earth’s atmosphere" ;
     ssn:hasProperty <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> ;
-    ssn:hasProperty <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:17045> .
+    ssn:hasProperty <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:17045> ;
+    ssn:hasProperty <id/Yepzpx1aSOKxUGZVJQnpew> .
+
+<id/Yepzpx1aSOKxUGZVJQnpew> rdf:type sosa:ObservableProperty ;
+    rdfs:label "Atmospheric/Barometric Pressure" ;
+    rdfs:description "atmospheric barometric pressure" ;
+    ssn:isPropertyOf <http://dbpedia.org/resource/Atmosphere_of_Earth> .
 
 <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> rdf:type sosa:ObservableProperty ;
     rdfs:label "atmospheric CO2" ;
@@ -144,6 +150,19 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
     sosa:observes <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> ;
     ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> ;
     qudt-1-1:hasUnit qudt-unit-1-1:PPM .
+
+<id/htxS2UJRTaO3yFuAfML3WQ> a landrs:Sensor;
+    rdfs:label "Atmospheric/Barometric Pressure Sensor" ;
+    schema:name "MPa Sensor" ;
+    rdfs:comment "Barometric sensor optimized for drone use" ;
+    schema:description "Barometric sensor optimized for drone use" ;
+    schema:identifier "BP-1433" ;
+    schema:sameAs <https://www.vishay.com/docs/84277/veml6070.pdf> ;
+    wdt:P31 wdt:Q79757 ;
+    sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;
+    sosa:observes <id/Yepzpx1aSOKxUGZVJQnpew> ;
+    ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> ;
+    qudt-1-1:hasUnit qudt-unit-1-1:MilliBAR .
 
 <id/YaUJ-iY3TM-xDK5pSj0gbg> a landrs:Sensor;
     rdfs:label "NO2-2431 NO2 Sensor" ;
