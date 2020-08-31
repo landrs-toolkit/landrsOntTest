@@ -117,7 +117,13 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
     rdfs:description "The Earth’s atmosphere" ;
     ssn:hasProperty <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:16526> ;
     ssn:hasProperty <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:17045> ;
+    ssn:hasProperty <https://www.wikidata.org/wiki/Q845339> ;
     ssn:hasProperty <id/Yepzpx1aSOKxUGZVJQnpew> .
+
+<https://www.wikidata.org/wiki/Q845339> rdf:type sosa:ObservableProperty ;
+    rdfs:label "Atmospheric Temperature" ;
+    rdfs:description "atmospheric temperature" ;
+    ssn:isPropertyOf <http://dbpedia.org/resource/Atmosphere_of_Earth> .
 
 <id/Yepzpx1aSOKxUGZVJQnpew> rdf:type sosa:ObservableProperty ;
     rdfs:label "Atmospheric/Barometric Pressure" ;
@@ -176,6 +182,19 @@ schema:unitCode qudt-unit-1-1:MilliBAR . # <http://qudt.org/1.1/vocab/unit#Milli
     sosa:observes <https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:17045> ;
     ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> ;
     qudt-1-1:hasUnit qudt-unit-1-1:PPM .
+
+    <id/B6SZtaATTF2eRx4l_z51MQ> a landrs:Sensor;
+        rdfs:label "DS18B20 temperature sensor" ;
+        schema:name "DS18B20" ;
+        rdfs:comment "Temperature sensor optimized for drone use" ;
+        schema:description "Temperature sensor optimized for drone use" ;
+        schema:identifier "DS18B20" ;
+        schema:sameAs <https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf> ;
+        #wdt:P31 wdt:Q216198 ;
+        sosa:isHostedBy <id/SqYZwJU6QLqmYKXLLGTx0g> ; #Raspberry Pi
+        sosa:observes <https://www.wikidata.org/wiki/Q845339> ;
+        ssn-system:hasOperatingRange <id/yACpCy_GTHyAY44Eu1TY1A> ;
+        qudt-1-1:hasUnit qudt-unit-1-1:DEG_C .
 
 <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> a sosa:FeatureOfInterest ;
     rdfs:label "This drone" ;
