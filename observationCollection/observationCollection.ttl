@@ -11,6 +11,8 @@
 @prefix qudt-unit-2-1: <http://qudt.org/2.1/vocab/unit#> .
 @prefix qudt-2-1:<http://www.qudt.org/2.1/schema/qudt#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
 
 # ******************* ObservationCollection 1 *******************
 <id/Mzg2ODAzQTctQ0VCNi00MkJGLUFDNjYtRkU4QTVBQThBMzZBCg==> a sosa:ObservationCollection;
@@ -45,3 +47,40 @@
     sosa:resultTime "2020-07-12T18:08:30.498986"^^xsd:dateTimeStamp .
 
 <http://sweetontology.net/propSpeed#Acceleration> a sosa:ObservableProperty .
+
+
+# ObservationCollection for a SpectralSensor 
+<id/Mzg2ODAzQTctQ0VCNi00MkJGLUFDNjYtRkU4QTVBQThBMzZBCg==> a sosa:ObservationCollection;
+    rdfs:label "Land Cover Observation Collection for Flight: 'A0001'" ; 
+    prov:wasInformedBy <id/MTRGQTVCMzktRjE1RS00MjI2LUIwMDQtRUQ0Q0REMzhDMDc3Cg==> ; # landrs:Flight
+    sosa:hasFeatureOfInterest <TODO> ; 
+    sosa:madeBySensor <id/7be23d6c-3eef-11eb-b378-0242ac130002> ;  # landrs:Sensor
+    sosa:observedProperty <http://sweetontology.net/prop#WaveProperty> ;    # sosa:ObservableProperty
+    sosa:hasMember  <id/4de0a59c-b70e-420f-9d0c-5c66f0a9d06c> ,  # sosa:Observation
+                    <id/4de0a59c-b70e-420f-9d0c-5c66f0a9d06c> .                    
+
+# Observation for a SpectralSensor (GeoObservation)
+<id/4de0a59c-b70e-420f-9d0c-5c66f0a9d06c> a landrs:GeoObservation ;
+    geo:alt 100.0 ;
+    geo:lat 45.75 ;
+    geo:long 4.85 ;
+    sosa:hasResult :dataset-001 ;
+    sosa:resultTime "2020-07-12T18:08:30.498986"^^xsd:dateTimeStamp .
+
+:dataset-001 a dcat:Dataset, sosa:Result ;
+    dcat:distribution :dataset-001-png .
+
+:dataset-001-png  rdf:type dcat:Distribution ;  
+    dcat:accessService :figure-service-006 ;  
+    dcat:accessURL <http://example.org/api/figure-006> ;  
+    dcat:mediaType <https://www.iana.org/assignments/media-types/image/png> .
+
+:figure-service-006
+  rdf:type dcat:DataService ;
+  dct:conformsTo <http://example.org/apidef/figure/v1.0> ;
+  dct:type <https://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view> ;
+  dcat:endpointDescription <http://example.org/api/figure-006/params> ;
+  dcat:endpointURL <http://example.org/api/figure-006> ;
+  dcat:servesDataset :dataset-001 .
+
+

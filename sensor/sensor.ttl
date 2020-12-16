@@ -42,27 +42,21 @@ wdt:P31 wd:Q209121 ; # Wikidata instanceOf image sensor
 sosa:isHostedBy <id/Mjc2MzRlZWUtZGRiYS00ZjE5LThjMDMtZDBmNDFjNmQzMTY0Cg==> ;  # landrs:FlightControllerBoard  NEED CHECK RASPBARYPI
 sosa:observes <http://sweetontology.net/prop#WaveProperty> ; # ? <http://sweetontology.net/propFraction#reflectance> NEED CHECK
 ssn:hasDeployment <id/6c95b5bc-3f5e-46e6-9e57-37be527a1d63> ;
-landrs:fov "[62.2, 48.8]" ;
-landrs:size "[3.68, 2.76]" ;
-landrs:resolution "[3280, 2464]".
-
+landrs:fovX 62.2 ;
+landrs:fovY 48.8;
+landrs:sizeX 3.68 ;
+landrs:sizeY 2.76 ;
+landrs:resolutionX 3280 ;
+landrs:resolutionY 2464 .
 
 <id/6c95b5bc-3f5e-46e6-9e57-37be527a1d63> a landrs:UAVDeployment ;
 rdfs:comment "Deployment of the Camera Module V2 in the UAV for the purpose of imagering capture."@en ;
 ssn:deployedOnPlatform <id/MjlmNmVmZTAtNGU1OS00N2I4LWI3MzYtODZkMDQ0MTRiNzcxCg==> ; # landrs:UAV "My Drone Thing"
 ssn:deployedSystem <id/Y2U1YThiZWYtCTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCh==> ; # landrs:SpectralSensor  "Raspberry Pi Camera Module v2"
 ssn:forProperty <http://sweetontology.net/prop#WaveProperty>  ;
-landrs:hasOrientation "[-0.009188792668282986,-0.00920554343611002,-1.6716502904891968]" .
-# landrs:hasMountingMethod "" . NEED LOOK 
-# landrs:hasLocation "" ; NEED LOOK AS USING GLOBAL DRONE POSITION
-
-# TODO: Define 
-#       fov , unit degree
-#       size , unit mm
-#       hasOrientation, unit degrees 
-#       Roll, pitch and yaw
-#       resolution 
-
+landrs:orientationX -0.009188792668282986 ; 
+landrs:orientationY -0.00920554343611002 ;
+landrs:orientationZ -1.6716502904891968 .
 
 
 <id/Y2U1YThiZTYtZTljMC00ZWY3LTlmMzItZGZhZDk4MTJkNDExCg==> a landrs:Sensor ;
