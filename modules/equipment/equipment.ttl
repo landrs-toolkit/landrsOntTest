@@ -1,0 +1,121 @@
+landrs:GroundControlStation a rdfs:Class ;
+  rdfs:label "Ground Control Station"@en ;
+  rdfs:comment "A ground control station (GCS) is a land- or sea-based control center that provides the facilities for human control of Unmanned Aerial Vehicles (UAVs or drones)."@en ;
+  rdfs:equivalentClass wd:Q4118990 ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:seeAlso <https://en.wikipedia.org/wiki/Ground_control_station> ;
+  landrs:component landrs:UAS ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:UAS
+  ] .
+
+landrs:CommunicationSystem a rdfs:Class ;
+  rdfs:label "Communication System"@en ;
+  rdfs:comment "Communication System, frequency and protocol by which a UxS communicates. For example Civilian UAV communications systems typically operate on frequencies of 2.4 GHz and 5.8 GHz. UAV communications systems work by using one frequency to control the aerial vehicle from the ground via a remote pilot while the other frequency is used to beam or relay First-Person View (FPV) video. By utilizing high-quality, reliable communications links, civilian UAVs are able to relay aerial visuals and data to those on the ground with ease, while still remaining in flight."@en ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf ssn:System ;
+  rdfs:subClassOf wd:Q31479975 ;
+  rdfs:subClassOf s3n:CommunicatingSystem ;
+  landrs:component landrs:UAS ;
+  landrs:isPartOf [
+    rdf:type landrs:Component, landrs:UAVComponent ;
+    landrs:hasWhole landrs:UAS
+  ] .
+
+landrs:Component a rdfs:Class ;
+  rdfs:label "Component"@en ;
+  rdfs:comment "Winston Part-Whole PO-Component-Type to enumerate composition of a UxV"@en ;
+  rdfs:subClassOf landrs:Product ;
+  owl:equivalentClass wd:Q811909 ;
+  owl:equivalentClass cpo:PO-Component-Type ;
+  opla:isNativeTo <https://raw.githubusercontent.com/cogan-shimizu-wsu/ContextualizedWinstonPartWhole/master/ContextualizedWinstonPartWhole.owl> .
+
+landrs:UAVComponent a rdfs:Class ;
+  rdfs:label "Unmanned Aircraft Component"@en;
+  rdfs:comment "Component of a Unmanned Aerial Vehicle"@en;
+  rdfs:subClassOf landrs:Component ;
+  rdfs:subClassOf wd:Q28816538 .
+
+landrs:Body a rdfs:Class, landrs:UAVComponent ;
+  rdfs:label "UxV Body"@en ;
+  rdfs:comment "Body of the UxV, for a UAV this would be an airframe"@en ;
+  rdfs:subClassOf landrs:Product ;
+  landrs:component landrs:UxV ;
+  landrs:isPartOf [
+    rdf:type landrs:Component, landrs:UAVComponent;
+    landrs:hasWhole landrs:UxV
+  ] .
+
+landrs:Airframe a rdfs:Class ;
+  rdfs:label "Airframe"@en ;
+  rdfs:comment "The mechanical structure of an aircraft is known as the airframe. This structure is typically considered to include the fuselage, undercarriage, empennage and wings, and exclude the propulsion system."@en ;
+  rdfs:subClassOf landrs:Body ;
+  owl:equivalentClass wd:Q222946 .
+
+
+landrs:Autopilot a rdfs:Class ;
+  rdfs:subClassOf aero:software-agent ;
+  rdfs:subClassOf  eqp:AircraftNavigationSystem ;
+  rdfs:subClassOf schema:SoftwareApplicaion ;
+  rdfs:subClassOf s3n:Algorithm ;
+  rdfs:label "Autopilot"@en ;
+  rdfs:comment "Software to control and navigate an aircraft"@en ;
+  skos:altLabel "Flight Controller"@en ;
+  skos:altLabel "Flight Controller Board"@en ;
+  landrs:component landrs:FlightControlSystem ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:FlightControlSystem
+  ] .
+
+landrs:Payload a rdfs:Class ;
+  rdfs:label "Payload"@en ;
+  rdfs:comment "Unmanned vehicle payload"@en ;
+  rdfs:subClassOf wd:Q319224 ;
+  landrs:component landrs:UAS ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:UAS
+  ] .
+
+landrs:SmartSensor a rdfs:Class, owl:Class ;
+  rdfs:label "Smart Sensor"@en;
+  rdfs:comment "Smart-Sensor - A SmartSensor is composed of one or more Sensors together with a MicroController that implements different Algorithms, and makes Algorithm Executions on the result of the Observations these Sensors make to output a resulting value for some Indicator. This value may then be communicated by some CommunicatingSystemCommunicatingSystem."@en;
+  schema:sameAs s3n:SmartSensor ;
+  rdfs:subClassOf ssn:System ;
+  rdfs:subClassOf sosa:Platform .
+
+landrs:SensorPayload a rdfs:Class ;
+  rdfs:label "Sensor Payload"@en ;
+  rdfs:comment "Payload that is a instrument platform such as cameras, atmospheric sensors, etc"@en ;
+  rdfs:subClassOf landrs:payload ;
+  rdfs:subClassOf sosa:System .
+
+landrs:CompanionComputer a rdfs:Class ;
+  rdfs:label "Companion Computer"@en ;
+  rdfs:comment "A companion computer is a device that travels on-board the vehicle and controls/communicates with the autopilot over a low-latency link. Apps running on a companion computer can perform computationally intensive or time-sensitive tasks, and add much greater intelligence than is provided by the autopilot alone." ;
+  rdfs:subClassOf landrs:payload ;
+  rdfs:subClassOf ssn:System ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf wd:Q944780 ;
+  rdfs:subClassOf s3n:MicroController ;
+  wdt:P279 wd:Q944780 .
+
+landrs:FlightControllerBoard a rdfs:Class ;
+  rdfs:label "Flight Controller Board"@en ;
+  rdfs:comment "A flight controller (FC) is a small circuit board of varying complexity. Its function is to direct the RPM of each motor in response to input. A command from the pilot for the multi-rotor to move forward is fed into the flight controller, which determines how to manipulate the motors accordingly."@en ;
+  rdfs:seeAlso <https://dronekit-python.readthedocs.io/en/latest/develop/companion-computers.html> ;
+  rdfs:subClassOf landrs:Product ;
+  rdfs:subClassOf sosa:System ;
+  rdfs:subClassOf s3n:MicroController ;
+  landrs:component landrs:FlightControlSystem ;
+  landrs:isPartOf [
+    rdf:type landrs:Component ;
+    landrs:hasWhole landrs:FlightControlSystem
+  ] .
+
+landrs:FlightControlSystem a rdfs:Class ;
+  rdfs:label "Flight Control System"@en ;
+  rdfs:comment "Aircraft system utilized to control flight surfaces"@en ;
+  owl:equivalentClass wd:Q11481471 .

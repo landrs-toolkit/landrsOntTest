@@ -1,0 +1,82 @@
+# baseURI: https://w3id.org/drone/activity
+# imports: http://www.w3.org/2006/time
+# prefix: activity
+
+@prefix : <https://w3id.org/drone/activity#> .
+@prefix activity: <https://w3id.org/drone/activity#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<https://w3id.org/drone/activity#>
+  a owl:Ontology ;
+  spin:imports <http://topbraid.org/spin/owlrl-all> ;
+  spin:imports <http://topbraid.org/spin/rdfsplus> ;
+  owl:imports <http://www.opengis.net/ont/mereology> ;
+  owl:imports <https://raw.githubusercontent.com/w3c/sdw/gh-pages/time/rdf/time.ttl> ;
+  owl:imports <https://www.w3.org/ns/prov-o> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+activity:Activity
+  a owl:Class ;
+  rdfs:label "Activity" ;
+  rdfs:subClassOf time:TemporalEntity ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty activity:hasEndEvent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty activity:hasStartEvent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty activity:hasEvent ;
+    ] ;
+  owl:equivalentClass prov:Activity ;
+.
+activity:Event
+  a owl:Class ;
+  rdfs:label "Event" ;
+  rdfs:subClassOf time:TemporalEntity ;
+  owl:equivalentClass prov:InstantaneousEvent ;
+.
+activity:hasEndEvent
+  a owl:ObjectProperty ;
+  rdfs:label "has end event" ;
+  rdfs:subPropertyOf activity:hasEvent ;
+.
+activity:hasEvent
+  a owl:ObjectProperty ;
+  rdfs:label "has event" ;
+  rdfs:range activity:Event ;
+.
+activity:hasStartEvent
+  a owl:ObjectProperty ;
+  rdfs:label "has start event" ;
+  rdfs:range activity:Event ;
+  rdfs:subPropertyOf activity:hasEvent ;
+.
+activity:hasSubactivity
+  a owl:ObjectProperty ;
+  rdfs:domain activity:Activity ;
+  rdfs:label "has subactivity" ;
+  rdfs:range activity:Activity ;
+  rdfs:subPropertyOf mereology:hasPart ;
+.
+activity:subActivityOf
+  a owl:ObjectProperty ;
+  rdfs:domain activity:Activity ;
+  rdfs:label "sub activity of" ;
+  rdfs:range activity:Activity ;
+  rdfs:subPropertyOf mereology:partOf ;
+.
